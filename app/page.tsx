@@ -176,12 +176,12 @@ export default function Home() {
         playsInline
       >
         <source
-          src="https://res.cloudinary.com/dgcedsrzf/video/upload/v1758861275/dji_fly_20241027_081323_0_1730259840479_video_cache_ig3omc.mp4"
+          src="https://res.cloudinary.com/dgcedsrzf/video/upload/v1761553124/202510271554_vb6tyk.mp4"
           type="video/mp4"
         />
       </video>
 
-      <div className="fixed inset-0 bg-black/50 -z-10" />
+      <div className="fixed inset-0  -z-10" />
 
       <header
         ref={headerRef}
