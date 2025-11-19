@@ -746,7 +746,7 @@ export default function BayanEvent() {
                 className="h-16 md:h-20 object-contain mb-4"
               />
               <p className="text-white/60 text-sm leading-relaxed">
-                Menghadirkan event berkelas yang menginspirasi dan membangun komunitas sejak 2022.
+                Menghadirkan event yang dikelola Bayan Group sejak 2022.
               </p>
             </div>
             <div>
@@ -761,8 +761,8 @@ export default function BayanEvent() {
             <div>
               <h4 className="text-sm font-bold tracking-wider uppercase mb-4 text-white">Contact</h4>
               <div className="space-y-2 text-sm text-white/60">
-                <div>Email: info@bayanevent.com</div>
-                <div>Phone: +62 123 4567 8900</div>
+                <div>Email: bayanopen@gmail.com</div>
+                <div>Phone: +62 8215 4815 113</div>
                 <div>Balikpapan, Kalimantan Timur</div>
               </div>
             </div>
