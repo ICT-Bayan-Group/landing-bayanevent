@@ -33,15 +33,15 @@ export default function BayanEvent() {
   const [isWhiteSection, setIsWhiteSection] = useState(false);
 
   const galleryImages = [
-    '/images/craft1.jpg',
-    '/images/photo-2.jpg',
-    '/images/photo-3.jpg',
-    '/images/photo-4.jpg',
-    '/images/medali.jpg',
-    '/images/hero.jpg',
-    '/images/bayanopen.jpg',
-    '/images/bayanrun.jpg',
-    '/images/bayancraft.jpg'
+    'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519206/photo-1_vrxzkt.jpg',
+    'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519206/photo-3_wecnxn.jpg',
+    'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519201/hero_cjhl1z.jpg',
+    'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519195/craft2_bu0ild.jpg',
+    'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519201/medali_xmg8cw.jpg',
+    'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519201/hero_cjhl1z.jpg',
+    'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519208/photo-4_yhivjf.jpg',
+    'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519900/DJI_20251012090310_0032_D_uy1q3c.jpg',
+    'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519898/20251012061749_-_BOM_0335_1_sdvtol.jpg'
   ];
 
   useEffect(() => {
@@ -332,10 +332,9 @@ export default function BayanEvent() {
           loop
           playsInline
           preload="auto"
-          poster="https://res.cloudinary.com/dgcedsrzf/video/upload/v1761553124/202510271554_vb6tyk.mp4"
         >
           <source
-            src="https://res.cloudinary.com/dgcedsrzf/video/upload/v1761553124/202510271554_vb6tyk.mp4"
+            src="https://res.cloudinary.com/dgcedsrzf/video/upload/v1763518716/Mars_Bayan_update_2025_kompress_bvjqld.mp4"
             type="video/mp4"
           />
           Your browser does not support the video tag.
@@ -352,7 +351,7 @@ export default function BayanEvent() {
         <div className="px-6 py-4 md:px-10 md:py-6 flex justify-between items-center">
           <div className="flex items-center">
             <img
-              src={isWhiteSection ? "/images/black.png" : "/images/nextlevel.png"}
+              src={isWhiteSection ? "https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519204/black_uqk69m.png" : "https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519200/nextlevel_aqk8gz.png"}
               alt="BAYAN SC"
               className="h-8 md:h-20 object-contain transition-all duration-500"
             />
@@ -508,7 +507,7 @@ export default function BayanEvent() {
               <div className="aspect-[4/5] bg-gradient-to-br from-orange-600 to-orange-800 relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500" />
                 <img 
-                  src="/images/bayanopen.jpg" 
+                  src="https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519199/bayanopen_gxlw2z.jpg" 
                   alt="BAYAN OPEN"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
@@ -530,7 +529,7 @@ export default function BayanEvent() {
               <div className="aspect-[4/5] bg-gradient-to-br from-blue-600 to-blue-800 relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500" />
                 <img 
-                  src="/images/bayanrun.jpg" 
+                  src="https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519206/bayanrun_lhaqwe.jpg" 
                   alt="BAYAN RUN"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
@@ -552,7 +551,7 @@ export default function BayanEvent() {
               <div className="aspect-[4/5] bg-gradient-to-br from-purple-600 to-pink-600 relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500" />
                 <img 
-                  src="/images/bayancraft.jpg" 
+                  src="https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519196/bayancraft_obrgla.jpg" 
                   alt="BAYAN CRAFT FESTIVAL"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
