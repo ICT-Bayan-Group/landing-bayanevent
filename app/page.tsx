@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { Calendar, Users, Award, Instagram, ChevronDown, Linkedin, Mail } from 'lucide-react';
+import { Calendar, Users, Award, Instagram, ChevronDown, Linkedin, Mail, Heart, MessageCircle } from 'lucide-react';
 
 export default function BayanEvent() {
   const preloaderRef = useRef<HTMLDivElement>(null);
@@ -19,11 +19,11 @@ export default function BayanEvent() {
   const ctaSectionRef = useRef<HTMLElement>(null);
   const galleryTrackRef = useRef<HTMLDivElement>(null);
   const testimonialsRef = useRef<HTMLElement>(null);
-  const partnersRef = useRef<HTMLElement>(null);
-  const timelineRef = useRef<HTMLElement>(null);
+  const col1Ref = useRef<HTMLDivElement>(null);
+  const col2Ref = useRef<HTMLDivElement>(null);
+  const col3Ref = useRef<HTMLDivElement>(null);
 
   const [stats, setStats] = useState({ events: 0, participants: 0, partners: 0, years: 0 });
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [statsAnimated, setStatsAnimated] = useState(false);
   const [isWhiteSection, setIsWhiteSection] = useState(false);
 
@@ -39,34 +39,95 @@ export default function BayanEvent() {
     'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519898/20251012061749_-_BOM_0335_1_sdvtol.jpg'
   ];
 
-  const testimonials = [
+  // Testimonials data for each column
+  const testimonialsCol1 = [
     {
-      name: "Agus Setiawan",
-      role: "Peserta BAYAN RUN 2024",
+      name: "𝓡𝓲𝓼𝓴𝓪 𝓡𝓪𝓰𝓲𝓵 𝓝𝓸𝓿𝓪𝓷𝓭𝓪",
+      username: "@riskarnovanda_",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop",
-      quote: "BAYAN RUN adalah pengalaman luar biasa! Rute yang menantang, organisasi yang profesional, dan semangat kebersamaan yang luar biasa. Tidak sabar untuk ikut lagi tahun depan!"
+      quote: "Bayan emang selalu keren.. terima kasih atas kepercayaannya. See u next time. Keep moving keep strong ❤️❤️",
+      likes: "1k",
+      comments: "500",
+      time: "08:10 PM | 23 Mar 2022"
     },
     {
-      name: "Sarah Wijaya",
-      role: "Atlet BAYAN OPEN 2023",
+      name: "Dendy",
+      username: "@dendy71_",
       image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop",
-      quote: "Turnamen yang sangat terorganisir dengan baik. Fasilitas kelas dunia dan atmosfer kompetisi yang fair play. BAYAN OPEN benar-benar mengangkat standar event olahraga di Indonesia."
+      quote: "❤️🔥🔥 Bayan di setiap Event",
+      likes: "1k",
+      comments: "500",
+      time: "08:10 PM | 23 Mar 2022"
     },
     {
-      name: "Budi Hartono",
-      role: "Vendor BAYAN CRAFT 2024",
+      name: "Elisa Bety Sunday ",
+      username: "@elisabety_sunday",
       image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop",
-      quote: "Sebagai pelaku UMKM, BAYAN CRAFT memberikan platform yang sempurna untuk memamerkan produk kami. Footfall yang tinggi dan audience yang tepat sasaran. Highly recommended!"
+      quote: "Event luar biasa blom bisa move on, malah ud kepikiran buat war tiketnya 2026 😂 pokoknya wajib war 🔥🔥",
+      likes: "1k",
+      comments: "500",
+      time: "08:10 PM | 23 Mar 2022"
     }
   ];
 
-  const partners = [
-    { name: "Partner 1", logo: "https://via.placeholder.com/150x80/1e3a8a/ffffff?text=PARTNER+1" },
-    { name: "Partner 2", logo: "https://via.placeholder.com/150x80/1e3a8a/ffffff?text=PARTNER+2" },
-    { name: "Partner 3", logo: "https://via.placeholder.com/150x80/1e3a8a/ffffff?text=PARTNER+3" },
-    { name: "Partner 4", logo: "https://via.placeholder.com/150x80/1e3a8a/ffffff?text=PARTNER+4" },
-    { name: "Partner 5", logo: "https://via.placeholder.com/150x80/1e3a8a/ffffff?text=PARTNER+5" },
-    { name: "Partner 6", logo: "https://via.placeholder.com/150x80/1e3a8a/ffffff?text=PARTNER+6" },
+  const testimonialsCol2 = [
+    {
+      name: "rsya",
+      username: "@skbyrsya",
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop",
+      quote: '"see uuu next eventt,adain lagi minn tahun depann meriah banget',
+      likes: "1k",
+      comments: "500",
+      time: "08:10 PM | 23 Mar 2022"
+    },
+    {
+      name: "P U T R I A D I T Y A",
+      username: "@fitrihapsari87",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop",
+      quote: "Bayan slu jor2an gokilzzz abizz🔥",
+      likes: "1k",
+      comments: "500",
+      time: "08:10 PM | 23 Mar 2022"
+    },
+    {
+      name: "Yuji Aden",
+      username: "@yusuf.jihad",
+      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop",
+      quote: "Kami keluarga besar dari @sdn001_balteng dan @paskib_sdasa001 , mengucapkan banyak banyak terima kasih yang tak terhingga pada PT Bayan Grup telah membuka peluang prestasi pada putra putri didik kami di sekolah dasar,, semoga terus melesat dan jaya selalu❤️🔥",
+      likes: "1k",
+      comments: "500",
+      time: "08:10 PM | 23 Mar 2022"
+    }
+  ];
+
+  const testimonialsCol3 = [
+    {
+      name: "Eva Faulina",
+      username: "@faulina.e",
+      image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop",
+      quote: "Luar biasa, ini sdh standar pertandingan internasional😍",
+      likes: "1k",
+      comments: "500",
+      time: "08:10 PM | 23 Mar 2022"
+    },
+    {
+      name: "Tama Prakoso",
+      username: "@tamatama_x10",
+      image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&h=150&fit=crop",
+      quote: "wahh luar biasa bgt ajangny, meriah polll",
+      likes: "1k",
+      comments: "500",
+      time: "08:10 PM | 23 Mar 2022"
+    },
+    {
+      name: "Winda Sari",
+      username: "@winda_sari_borneo",
+      image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&h=150&fit=crop",
+      quote: "keren nih bisa sekalian ngangkat pariwisata kaltim",
+      likes: "1k",
+      comments: "500",
+      time: "08:10 PM | 23 Mar 2022"
+    }
   ];
 
   const timeline = [
@@ -76,7 +137,6 @@ export default function BayanEvent() {
     { year: "2025", title: "The Next Level", description: "Bayan Run 2025 | Bayan Open Sirnas C 2025 | Bayan CraftArt Fest 2025" }
   ];
 
-  // Smooth scroll function
   const smoothScrollTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -87,7 +147,6 @@ export default function BayanEvent() {
     }
   };
 
-  // Counter animation dengan smooth easing
   const animateStats = () => {
     const targets = { events: 10, participants: 20000, partners: 10, years: 3 };
     const duration = 2000;
@@ -96,7 +155,6 @@ export default function BayanEvent() {
     const animate = (currentTime: number) => {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      
       const eased = 1 - Math.pow(1 - progress, 4);
       
       setStats({
@@ -202,7 +260,6 @@ export default function BayanEvent() {
         const headerHeight = 80;
         let isInWhiteSection = false;
 
-        // Check Events Section (bg-white)
         if (eventsRef.current) {
           const eventsRect = eventsRef.current.getBoundingClientRect();
           if (eventsRect.top <= headerHeight && eventsRect.bottom >= headerHeight) {
@@ -210,7 +267,6 @@ export default function BayanEvent() {
           }
         }
 
-        // Check CTA Section (bg-white)
         if (ctaSectionRef.current) {
           const ctaRect = ctaSectionRef.current.getBoundingClientRect();
           if (ctaRect.top <= headerHeight && ctaRect.bottom >= headerHeight) {
@@ -218,9 +274,15 @@ export default function BayanEvent() {
           }
         }
 
+          if (testimonialsRef.current) {
+          const testimonialsRect = testimonialsRef.current.getBoundingClientRect();
+          if (testimonialsRect.top <= headerHeight && testimonialsRect.bottom >= headerHeight) {
+            isInWhiteSection = true;
+          }
+        }
+
         setIsWhiteSection(isInWhiteSection);
 
-        // About section
         if (aboutRef.current) {
           const aboutTop = aboutRef.current.getBoundingClientRect().top;
           if (aboutTop < windowHeight * 0.75) {
@@ -244,7 +306,6 @@ export default function BayanEvent() {
           }
         }
 
-        // Events section
         if (eventsRef.current) {
           const eventsTop = eventsRef.current.getBoundingClientRect().top;
           if (eventsTop < windowHeight * 0.75) {
@@ -263,7 +324,6 @@ export default function BayanEvent() {
       handleScroll();
     };
 
-    // Video autoplay
     const playVideo = async () => {
       if (videoRef.current) {
         try {
@@ -285,7 +345,7 @@ export default function BayanEvent() {
 
     setTimeout(playVideo, 3000);
 
-    // Gallery auto-scroll dengan smooth animation
+    // Gallery auto-scroll
     const galleryTrack = galleryTrackRef.current;
     if (galleryTrack) {
       let position = 0;
@@ -295,21 +355,108 @@ export default function BayanEvent() {
       const animateGallery = (currentTime: number) => {
         const deltaTime = currentTime - lastTime;
         lastTime = currentTime;
-        
         position -= speed * deltaTime;
-        
         const totalWidth = galleryTrack.scrollWidth / 2;
         if (Math.abs(position) >= totalWidth) {
           position = 0;
         }
-        
         galleryTrack.style.transform = `translateX(${position}px)`;
         requestAnimationFrame(animateGallery);
       };
       
       requestAnimationFrame(animateGallery);
     }
+
+    // GSAP Testimonials Animation
+    let animationFrameId: number;
+    
+    const animateTestimonials = () => {
+      const col1 = col1Ref.current;
+      const col2 = col2Ref.current;
+      const col3 = col3Ref.current;
+
+      if (col1 && col2 && col3) {
+        let pos1 = 0;
+        let pos2 = col2.scrollHeight / 2;
+        let pos3 = 0;
+        
+        const speed = 0.5;
+
+        const animate = () => {
+          // Column 1: Top to Bottom
+          pos1 += speed;
+          if (pos1 >= col1.scrollHeight / 2) {
+            pos1 = 0;
+          }
+          col1.style.transform = `translateY(-${pos1}px)`;
+
+          // Column 2: Bottom to Top
+          pos2 -= speed;
+          if (pos2 <= 0) {
+            pos2 = col2.scrollHeight / 2;
+          }
+          col2.style.transform = `translateY(-${pos2}px)`;
+
+          // Column 3: Top to Bottom
+          pos3 += speed;
+          if (pos3 >= col3.scrollHeight / 2) {
+            pos3 = 0;
+          }
+          col3.style.transform = `translateY(-${pos3}px)`;
+
+          animationFrameId = requestAnimationFrame(animate);
+        };
+
+        animate();
+      }
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateTestimonials();
+        } else {
+          if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+          }
+        }
+      });
+    }, { threshold: 0.1 });
+
+    if (testimonialsRef.current) {
+      observer.observe(testimonialsRef.current);
+    }
+
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+      if (testimonialsRef.current) {
+        observer.unobserve(testimonialsRef.current);
+      }
+    };
   }, [statsAnimated]);
+
+  const TestimonialCard = ({ testimonial }: { testimonial: any }) => (
+    <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 flex-shrink-0">
+      <div className="flex items-start justify-between mb-4">
+        <div className="flex items-center gap-3">
+          <div>
+            <h4 className="font-bold text-gray-900 text-sm">{testimonial.name}</h4>
+            <p className="text-xs text-gray-500">{testimonial.username}</p>
+          </div>
+        </div>
+        <Instagram className="w-5 h-5 text-pink-500" />
+      </div>
+      <p className="text-gray-700 text-sm leading-relaxed mb-4">
+        {testimonial.quote}
+      </p>
+      <div className="flex items-center justify-between text-xs text-gray-500 pt-3 border-t border-gray-100">
+        <div className="flex items-center gap-4">
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="text-white overflow-x-hidden scroll-smooth">
@@ -532,7 +679,7 @@ export default function BayanEvent() {
       </section>
 
       {/* Timeline Section */}
-      <section id="timeline" ref={timelineRef} className="relative min-h-screen px-6 md:px-10 py-20 overflow-hidden">
+      <section id="timeline" className="relative min-h-screen px-6 md:px-10 py-20 overflow-hidden">
         <div className="absolute inset-0 w-full h-full">
           <video
             autoPlay
@@ -577,38 +724,54 @@ export default function BayanEvent() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" ref={testimonialsRef} className="relative min-h-screen px-6 md:px-10 py-20 bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-4 text-center text-white">
+      <section id="testimonials" ref={testimonialsRef} className="relative min-h-screen px-6 md:px-10 py-20 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-4 text-center text-blue-900">
             What They <span className="text-orange-600">Say</span>
           </h2>
-          <p className="text-center text-white/70 mb-16 font-semibold text-lg">Apa kata mereka tentang event kami</p>
+          <p className="text-center text-blue-900 mb-16 font-semibold text-lg">Apa kata mereka tentang Bayan Event</p>
 
-          <div className="relative">
-            <div className="grid md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, index) => (
-                <div 
-                  key={index}
-                  className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-blue-100"
-                >
-                  <div className="flex items-center mb-6">
-                    <img 
-                      src={testimonial.image} 
-                      alt={testimonial.name}
-                      className="w-16 h-16 rounded-full object-cover border-4 border-orange-500"
-                    />
-                    <div className="ml-4">
-                      <h4 className="font-bold text-blue-900 text-lg">{testimonial.name}</h4>
-                      <p className="text-sm text-gray-600">{testimonial.role}</p>
-                    </div>
-                  </div>
-                  <div className="text-6xl text-orange-500 mb-4 opacity-20">"</div>
-                  <p className="text-gray-700 leading-relaxed italic">
-                    {testimonial.quote}
-                  </p>
+          <div className="relative h-[600px]">
+            {/* Desktop: 3 columns with scroll animation */}
+            <div className="hidden md:grid md:grid-cols-3 gap-6 h-full">
+              {/* Column 1: Top to Bottom */}
+              <div className="overflow-hidden">
+                <div ref={col1Ref} className="flex flex-col gap-6">
+                  {[...testimonialsCol1, ...testimonialsCol1].map((testimonial, index) => (
+                    <TestimonialCard key={`col1-${index}`} testimonial={testimonial} />
+                  ))}
                 </div>
+              </div>
+
+              {/* Column 2: Bottom to Top */}
+              <div className="overflow-hidden">
+                <div ref={col2Ref} className="flex flex-col gap-6">
+                  {[...testimonialsCol2, ...testimonialsCol2].map((testimonial, index) => (
+                    <TestimonialCard key={`col2-${index}`} testimonial={testimonial} />
+                  ))}
+                </div>
+              </div>
+
+              {/* Column 3: Top to Bottom */}
+              <div className="overflow-hidden">
+                <div ref={col3Ref} className="flex flex-col gap-6">
+                  {[...testimonialsCol3, ...testimonialsCol3].map((testimonial, index) => (
+                    <TestimonialCard key={`col3-${index}`} testimonial={testimonial} />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile: Simple grid without animation */}
+            <div className="grid md:hidden gap-6 overflow-y-auto h-full pb-8">
+              {[...testimonialsCol1, ...testimonialsCol2, ...testimonialsCol3].slice(0, 6).map((testimonial, index) => (
+                <TestimonialCard key={`mobile-${index}`} testimonial={testimonial} />
               ))}
             </div>
+
+            {/* Gradient overlays */}
+            <div className="hidden md:block absolute top-0 left-0 right-0 h-32 pointer-events-none z-10"></div>
+            <div className="hidden md:block absolute bottom-0 left-0 right-0 h-32  pointer-events-none z-10"></div>
           </div>
         </div>
       </section>
