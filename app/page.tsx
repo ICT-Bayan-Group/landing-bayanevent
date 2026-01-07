@@ -28,15 +28,15 @@ export default function BayanEvent() {
   const [isWhiteSection, setIsWhiteSection] = useState(false);
 
   const galleryImages = [
-    'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519206/photo-1_vrxzkt.jpg',
-    'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519206/photo-3_wecnxn.jpg',
-    'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519201/hero_cjhl1z.jpg',
-    'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519195/craft2_bu0ild.jpg',
-    'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519201/medali_xmg8cw.jpg',
-    'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519201/hero_cjhl1z.jpg',
-    'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519208/photo-4_yhivjf.jpg',
-    'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519900/DJI_20251012090310_0032_D_uy1q3c.jpg',
-    'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519898/20251012061749_-_BOM_0335_1_sdvtol.jpg'
+    'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765516/DJI_20251012054325_0006_D_p3yx0k.jpg',
+    'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765513/20251012061749_-_BOM_0335_tssmcb.jpg',
+    'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765514/20251012061107_-_BOM_7070_nah0u9.jpg',
+    'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765503/Bayan-8672_iuuxhb.jpg',
+    'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765487/Bayan-8327_ckwhqx.jpg',
+    'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765497/DJI_20251012090310_0032_D_nm8eit.jpg',
+    'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767779754/Bayan-7833_qmyabn.jpg',
+    'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767779754/Bayan-7315_my1gbe.jpg',
+    'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767779754/Bayan-7833_qmyabn.jpg'
   ];
 
   // Testimonials data for each column
@@ -486,7 +486,7 @@ export default function BayanEvent() {
           preload="auto"
         >
           <source
-            src="https://res.cloudinary.com/dgcedsrzf/video/upload/v1763518716/Mars_Bayan_update_2025_kompress_bvjqld.mp4"
+            src="https://res.cloudinary.com/djs5pi7ev/video/upload/v1767777003/teaser-hero_qukzh2.mp4"
             type="video/mp4"
           />
         </video>
@@ -498,7 +498,7 @@ export default function BayanEvent() {
       <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50 opacity-0 translate-y-[-20px] transition-all duration-1000">
         <div className="px-6 py-4 md:px-10 md:py-6 flex justify-between items-center">
           <img
-            src={isWhiteSection ? "https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519204/black_uqk69m.png" : "https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519200/nextlevel_aqk8gz.png"}
+            src={isWhiteSection ? "https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765491/LOGO_TEMA_belakang_jkkrtc.png" : "https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765525/Bayan_The_Next_Level_e77j8d.png"}
             alt="BAYAN SC"
             className="h-8 md:h-20 object-contain transition-all duration-500 ease-in-out"
           />
@@ -625,7 +625,7 @@ export default function BayanEvent() {
               <div className="aspect-[4/5] bg-gradient-to-br from-orange-600 to-orange-800 relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500" />
                 <img 
-                  src="https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519199/bayanopen_gxlw2z.jpg" 
+                  src="https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765503/Bayan-1739_e0mi1r.jpg" 
                   alt="BAYAN OPEN"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
@@ -643,7 +643,7 @@ export default function BayanEvent() {
               <div className="aspect-[4/5] bg-gradient-to-br from-blue-600 to-blue-800 relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500" />
                 <img 
-                  src="https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519206/bayanrun_lhaqwe.jpg" 
+                  src="https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765516/20251012060936_-_BOM_7023_uzwd7f.jpg" 
                   alt="BAYAN RUN"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
@@ -661,7 +661,7 @@ export default function BayanEvent() {
               <div className="aspect-[4/5] bg-gradient-to-br from-purple-600 to-pink-600 relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500" />
                 <img 
-                  src="https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519196/bayancraft_obrgla.jpg" 
+                  src="https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765488/Bayan-8827_woaplh.jpg" 
                   alt="BAYAN CRAFT FESTIVAL"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
@@ -688,7 +688,7 @@ export default function BayanEvent() {
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src="https://res.cloudinary.com/dgcedsrzf/video/upload/v1763532560/teaser_c0bxdo.mp4" type="video/mp4" />
+            <source src="https://res.cloudinary.com/djs5pi7ev/video/upload/v1767777527/teaser-flow_xbhw7p.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-black/60"></div>
         </div>
@@ -788,7 +788,7 @@ export default function BayanEvent() {
             <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105">
               <div className="w-33 h-33 mx-auto mb-6 flex items-center justify-center">
                 <img 
-                  src="https://res.cloudinary.com/dgcedsrzf/image/upload/v1763524204/LOGO_EVENT_Bayan_2025_skeag0.png" 
+                  src="https://res.cloudinary.com/djs5pi7ev/image/upload/v1767777423/LOGO_EVENT_Bayan_2025_f8yznc.png" 
                   alt="Bayan Event 2025"
                   className="w-full h-full object-contain"
                 />
@@ -805,7 +805,7 @@ export default function BayanEvent() {
             <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105">
               <div className="w-42 h-42 mx-auto mb-6 flex items-center justify-center">
                 <img 
-                  src="https://res.cloudinary.com/dgcedsrzf/image/upload/v1763524200/LOGO_BR2025_2_uyb9q4.png" 
+                  src="https://res.cloudinary.com/djs5pi7ev/image/upload/v1767777417/LOGO_BR2025_2_ph1bh8.png" 
                   alt="Bayan Run 2025"
                   className="w-full h-full object-contain"
                 />
@@ -822,7 +822,7 @@ export default function BayanEvent() {
             <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105">
               <div className="w-42 h-42 mx-auto mb-6 flex items-center justify-center">
                 <img 
-                  src="https://res.cloudinary.com/dgcedsrzf/image/upload/v1763524200/LOGO_BO2025_mqhcsr.png" 
+                  src="https://res.cloudinary.com/djs5pi7ev/image/upload/v1767777416/LOGO_BO2025_resdzo.png" 
                   alt="Bayan OPEN 2025"
                   className="w-full h-full object-contain"
                 />
@@ -904,7 +904,7 @@ export default function BayanEvent() {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div className="md:col-span-1">
               <img
-                src="https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519200/nextlevel_aqk8gz.png"
+                src="https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765525/Bayan_The_Next_Level_e77j8d.png"
                 alt="BAYAN SC"
                 className="h-16 md:h-20 object-contain mb-4"
               />

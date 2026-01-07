@@ -14,7 +14,7 @@ const sportsEventSchema = {
   name: 'BAYAN EVENT',
   description: 'Penyelenggara Event Terbesar di Balikpapan - Bayan Run, Bayan Open, Bayan Craftart Festival',
   url: 'https://www.bayanevent.com', // Ganti dengan URL sebenarnya
-  logo: 'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519204/black_uqk69m.png',
+  logo: 'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765491/LOGO_TEMA_belakang_jkkrtc.png',
   sport: ['Running', 'Badminton', 'Marathon', 'Athletics'],
   address: {
     '@type': 'PostalAddress',
@@ -88,7 +88,7 @@ export const metadata: Metadata = {
     description: 'BAYAN EVENT - Penyelenggara Bayan Run, Bayan Open, Bayan Craftart Festival di Balikpapan. Event lari dan bulutangkis terbesar di Kalimantan Timur',
     images: [
       {
-        url: 'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519204/black_uqk69m.png',
+        url: 'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765491/LOGO_TEMA_belakang_jkkrtc.png',
         width: 1200,
         height: 630,
         alt: 'BAYAN EVENT - Bayan Run & Bayan Open',
@@ -113,11 +113,11 @@ export const metadata: Metadata = {
   // Icons dengan optimasi
   icons: {
     icon: [
-      { url: 'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519204/black_uqk69m.png', media: '(prefers-color-scheme: light)' },
-      { url: 'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519200/nextlevel_aqk8gz.png', media: '(prefers-color-scheme: dark)' },
+      { url: 'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765491/LOGO_TEMA_belakang_jkkrtc.png', media: '(prefers-color-scheme: light)' },
+      { url: 'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765525/Bayan_The_Next_Level_e77j8d.png', media: '(prefers-color-scheme: dark)' },
     ],
     apple: [
-      { url: 'https://res.cloudinary.com/dgcedsrzf/image/upload/v1763519204/black_uqk69m.png' },
+      { url: 'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765491/LOGO_TEMA_belakang_jkkrtc.png' },
     ],
   },
   
