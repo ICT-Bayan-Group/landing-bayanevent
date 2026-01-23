@@ -1,11 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { Calendar, Users, Award, Instagram, ChevronDown, Linkedin, Mail, Heart, MessageCircle } from 'lucide-react';
+import { Instagram, ChevronDown, Linkedin, Mail } from 'lucide-react';
 
 export default function BayanEvent() {
-  const preloaderRef = useRef<HTMLDivElement>(null);
-  const preloaderTextRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
@@ -27,46 +25,33 @@ export default function BayanEvent() {
   const [statsAnimated, setStatsAnimated] = useState(false);
   const [isWhiteSection, setIsWhiteSection] = useState(false);
 
+  // Optimized images with Cloudinary transformations for faster loading
   const galleryImages = [
-    'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765516/DJI_20251012054325_0006_D_p3yx0k.jpg',
-    'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765513/20251012061749_-_BOM_0335_tssmcb.jpg',
-    'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765514/20251012061107_-_BOM_7070_nah0u9.jpg',
-    'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765503/Bayan-8672_iuuxhb.jpg',
-    'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765487/Bayan-8327_ckwhqx.jpg',
-    'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765497/DJI_20251012090310_0032_D_nm8eit.jpg',
-    'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767779754/Bayan-7833_qmyabn.jpg',
-    'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767779754/Bayan-7315_my1gbe.jpg',
-    'https://res.cloudinary.com/djs5pi7ev/image/upload/v1767779754/Bayan-7833_qmyabn.jpg'
+    'https://res.cloudinary.com/djs5pi7ev/image/upload/w_600,q_auto,f_auto/v1767765516/DJI_20251012054325_0006_D_p3yx0k.jpg',
+    'https://res.cloudinary.com/djs5pi7ev/image/upload/w_600,q_auto,f_auto/v1767765513/20251012061749_-_BOM_0335_tssmcb.jpg',
+    'https://res.cloudinary.com/djs5pi7ev/image/upload/w_600,q_auto,f_auto/v1767765514/20251012061107_-_BOM_7070_nah0u9.jpg',
+    'https://res.cloudinary.com/djs5pi7ev/image/upload/w_600,q_auto,f_auto/v1767765503/Bayan-8672_iuuxhb.jpg',
+    'https://res.cloudinary.com/djs5pi7ev/image/upload/w_600,q_auto,f_auto/v1767765487/Bayan-8327_ckwhqx.jpg',
+    'https://res.cloudinary.com/djs5pi7ev/image/upload/w_600,q_auto,f_auto/v1767765497/DJI_20251012090310_0032_D_nm8eit.jpg',
+    'https://res.cloudinary.com/djs5pi7ev/image/upload/w_600,q_auto,f_auto/v1767779754/Bayan-7833_qmyabn.jpg',
+    'https://res.cloudinary.com/djs5pi7ev/image/upload/w_600,q_auto,f_auto/v1767779754/Bayan-7315_my1gbe.jpg',
   ];
 
-  // Testimonials data for each column
   const testimonialsCol1 = [
     {
       name: "𝓡𝓲𝓼𝓴𝓪 𝓡𝓪𝓰𝓲𝓵 𝓝𝓸𝓿𝓪𝓷𝓭𝓪",
       username: "@riskarnovanda_",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop",
       quote: "Bayan emang selalu keren.. terima kasih atas kepercayaannya. See u next time. Keep moving keep strong ❤️❤️",
-      likes: "1k",
-      comments: "500",
-      time: "08:10 PM | 23 Mar 2022"
     },
     {
       name: "Dendy",
       username: "@dendy71_",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop",
       quote: "❤️🔥🔥 Bayan di setiap Event",
-      likes: "1k",
-      comments: "500",
-      time: "08:10 PM | 23 Mar 2022"
     },
     {
-      name: "Elisa Bety Sunday ",
+      name: "Elisa Bety Sunday",
       username: "@elisabety_sunday",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop",
       quote: "Event luar biasa blom bisa move on, malah ud kepikiran buat war tiketnya 2026 😂 pokoknya wajib war 🔥🔥",
-      likes: "1k",
-      comments: "500",
-      time: "08:10 PM | 23 Mar 2022"
     }
   ];
 
@@ -74,29 +59,17 @@ export default function BayanEvent() {
     {
       name: "rsya",
       username: "@skbyrsya",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop",
-      quote: '"see uuu next eventt,adain lagi minn tahun depann meriah banget',
-      likes: "1k",
-      comments: "500",
-      time: "08:10 PM | 23 Mar 2022"
+      quote: "see uuu next eventt,adain lagi minn tahun depann meriah banget",
     },
     {
       name: "P U T R I A D I T Y A",
       username: "@fitrihapsari87",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop",
       quote: "Bayan slu jor2an gokilzzz abizz🔥",
-      likes: "1k",
-      comments: "500",
-      time: "08:10 PM | 23 Mar 2022"
     },
     {
       name: "Yuji Aden",
       username: "@yusuf.jihad",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop",
       quote: "Kami keluarga besar dari @sdn001_balteng dan @paskib_sdasa001 , mengucapkan banyak banyak terima kasih yang tak terhingga pada PT Bayan Grup telah membuka peluang prestasi pada putra putri didik kami di sekolah dasar,, semoga terus melesat dan jaya selalu❤️🔥",
-      likes: "1k",
-      comments: "500",
-      time: "08:10 PM | 23 Mar 2022"
     }
   ];
 
@@ -104,29 +77,17 @@ export default function BayanEvent() {
     {
       name: "Eva Faulina",
       username: "@faulina.e",
-      image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop",
       quote: "Luar biasa, ini sdh standar pertandingan internasional😍",
-      likes: "1k",
-      comments: "500",
-      time: "08:10 PM | 23 Mar 2022"
     },
     {
       name: "Tama Prakoso",
       username: "@tamatama_x10",
-      image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&h=150&fit=crop",
       quote: "wahh luar biasa bgt ajangny, meriah polll",
-      likes: "1k",
-      comments: "500",
-      time: "08:10 PM | 23 Mar 2022"
     },
     {
       name: "Winda Sari",
       username: "@winda_sari_borneo",
-      image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&h=150&fit=crop",
       quote: "keren nih bisa sekalian ngangkat pariwisata kaltim",
-      likes: "1k",
-      comments: "500",
-      time: "08:10 PM | 23 Mar 2022"
     }
   ];
 
@@ -175,155 +136,111 @@ export default function BayanEvent() {
   };
 
   useEffect(() => {
-    // Preloader animation
-    const words = ['BAYAN GROUP', 'EVENT', 'WELCOME'];
-    const colors = [
-      'linear-gradient(135deg, #d86609ff 0%, #ec8804ff 100%)',
-      'linear-gradient(135deg, #d86609ff 0%, #ec8804ff 100%)',
-      'linear-gradient(135deg, #d86609ff 0%, #ec8804ff 100%)',
+    // Immediate animations without preloader
+    const elements = [
+      { el: headerRef.current, delay: 100 },
+      { el: titleRef.current, delay: 300 },
+      { el: subtitleRef.current, delay: 500 },
+      { el: ctaRef.current, delay: 700 },
+      { el: scrollIndicatorRef.current, delay: 900 }
     ];
-    let currentIndex = 0;
-    const preloaderWord = preloaderTextRef.current?.querySelector('span');
 
-    if (preloaderTextRef.current) {
-      preloaderTextRef.current.style.opacity = '1';
-    }
-
-    const cycleWords = () => {
-      if (currentIndex >= words.length - 1) {
+    elements.forEach(({ el, delay }) => {
+      if (el) {
         setTimeout(() => {
-          if (preloaderRef.current) {
-            preloaderRef.current.style.transform = 'translateY(-100%)';
-            preloaderRef.current.style.transition = 'transform 0.8s cubic-bezier(0.76, 0, 0.24, 1)';
-            
-            setTimeout(() => {
-              if (preloaderRef.current) preloaderRef.current.style.display = 'none';
-              initMainAnimations();
-            }, 800);
-          }
-        }, 600);
-        return;
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }, delay);
       }
+    });
 
-      currentIndex++;
-
-      if (preloaderWord && preloaderRef.current) {
-        preloaderRef.current.style.background = colors[currentIndex];
-        preloaderWord.style.opacity = '0';
-        preloaderWord.style.transform = 'translateY(-20px)';
-
-        setTimeout(() => {
-          if (preloaderWord) {
-            preloaderWord.textContent = words[currentIndex];
-            preloaderWord.style.opacity = '1';
-            preloaderWord.style.transform = 'translateY(0)';
-          }
-        }, 200);
-      }
-
-      setTimeout(cycleWords, currentIndex === 1 ? 1200 : 200);
-    };
-
-    setTimeout(cycleWords, 1000);
-
-    const initMainAnimations = () => {
-      const elements = [
-        { el: headerRef.current, delay: 0 },
-        { el: titleRef.current, delay: 400 },
-        { el: subtitleRef.current, delay: 600 },
-        { el: ctaRef.current, delay: 800 },
-        { el: scrollIndicatorRef.current, delay: 1000 }
-      ];
-
-      elements.forEach(({ el, delay }) => {
-        if (el) {
-          setTimeout(() => {
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-          }, delay);
-        }
-      });
-
-      if (window.innerWidth > 768) {
-        const handleMouseMove = (e: MouseEvent) => {
-          const x = (e.clientX / window.innerWidth - 0.5) * 2;
-          const y = (e.clientY / window.innerHeight - 0.5) * 2;
-          if (titleRef.current) {
-            titleRef.current.style.transform = `translate(${x * 15}px, ${y * 15}px)`;
-          }
-        };
-        window.addEventListener('mousemove', handleMouseMove);
-      }
-
-      const handleScroll = () => {
-        const windowHeight = window.innerHeight;
-        const headerHeight = 80;
-        let isInWhiteSection = false;
-
-        if (eventsRef.current) {
-          const eventsRect = eventsRef.current.getBoundingClientRect();
-          if (eventsRect.top <= headerHeight && eventsRect.bottom >= headerHeight) {
-            isInWhiteSection = true;
-          }
-        }
-
-        if (ctaSectionRef.current) {
-          const ctaRect = ctaSectionRef.current.getBoundingClientRect();
-          if (ctaRect.top <= headerHeight && ctaRect.bottom >= headerHeight) {
-            isInWhiteSection = true;
-          }
-        }
-
-          if (testimonialsRef.current) {
-          const testimonialsRect = testimonialsRef.current.getBoundingClientRect();
-          if (testimonialsRect.top <= headerHeight && testimonialsRect.bottom >= headerHeight) {
-            isInWhiteSection = true;
-          }
-        }
-
-        setIsWhiteSection(isInWhiteSection);
-
-        if (aboutRef.current) {
-          const aboutTop = aboutRef.current.getBoundingClientRect().top;
-          if (aboutTop < windowHeight * 0.75) {
-            if (aboutTitleRef.current) {
-              aboutTitleRef.current.style.opacity = '1';
-              aboutTitleRef.current.style.transform = 'translateY(0)';
-            }
-            setTimeout(() => {
-              if (aboutTextRef.current) {
-                aboutTextRef.current.style.opacity = '1';
-                aboutTextRef.current.style.transform = 'translateY(0)';
-              }
-            }, 200);
-            
-            if (!statsAnimated) {
-              setTimeout(() => {
-                animateStats();
-                setStatsAnimated(true);
-              }, 400);
-            }
-          }
-        }
-
-        if (eventsRef.current) {
-          const eventsTop = eventsRef.current.getBoundingClientRect().top;
-          if (eventsTop < windowHeight * 0.75) {
-            const cards = eventsRef.current.querySelectorAll('.event-card');
-            cards.forEach((card, index) => {
-              setTimeout(() => {
-                (card as HTMLElement).style.opacity = '1';
-                (card as HTMLElement).style.transform = 'translateY(0)';
-              }, index * 200);
-            });
-          }
+    // Mouse parallax effect
+    if (window.innerWidth > 768) {
+      const handleMouseMove = (e: MouseEvent) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 2;
+        const y = (e.clientY / window.innerHeight - 0.5) * 2;
+        if (titleRef.current) {
+          titleRef.current.style.transform = `translate(${x * 15}px, ${y * 15}px)`;
         }
       };
+      window.addEventListener('mousemove', handleMouseMove);
+      return () => window.removeEventListener('mousemove', handleMouseMove);
+    }
+  }, []);
 
-      window.addEventListener('scroll', handleScroll);
-      handleScroll();
+  useEffect(() => {
+    const handleScroll = () => {
+      const windowHeight = window.innerHeight;
+      const headerHeight = 80;
+      let isInWhiteSection = false;
+
+      if (eventsRef.current) {
+        const eventsRect = eventsRef.current.getBoundingClientRect();
+        if (eventsRect.top <= headerHeight && eventsRect.bottom >= headerHeight) {
+          isInWhiteSection = true;
+        }
+      }
+
+      if (ctaSectionRef.current) {
+        const ctaRect = ctaSectionRef.current.getBoundingClientRect();
+        if (ctaRect.top <= headerHeight && ctaRect.bottom >= headerHeight) {
+          isInWhiteSection = true;
+        }
+      }
+
+      if (testimonialsRef.current) {
+        const testimonialsRect = testimonialsRef.current.getBoundingClientRect();
+        if (testimonialsRect.top <= headerHeight && testimonialsRect.bottom >= headerHeight) {
+          isInWhiteSection = true;
+        }
+      }
+
+      setIsWhiteSection(isInWhiteSection);
+
+      if (aboutRef.current) {
+        const aboutTop = aboutRef.current.getBoundingClientRect().top;
+        if (aboutTop < windowHeight * 0.75) {
+          if (aboutTitleRef.current) {
+            aboutTitleRef.current.style.opacity = '1';
+            aboutTitleRef.current.style.transform = 'translateY(0)';
+          }
+          setTimeout(() => {
+            if (aboutTextRef.current) {
+              aboutTextRef.current.style.opacity = '1';
+              aboutTextRef.current.style.transform = 'translateY(0)';
+            }
+          }, 200);
+          
+          if (!statsAnimated) {
+            setTimeout(() => {
+              animateStats();
+              setStatsAnimated(true);
+            }, 400);
+          }
+        }
+      }
+
+      if (eventsRef.current) {
+        const eventsTop = eventsRef.current.getBoundingClientRect().top;
+        if (eventsTop < windowHeight * 0.75) {
+          const cards = eventsRef.current.querySelectorAll('.event-card');
+          cards.forEach((card, index) => {
+            setTimeout(() => {
+              (card as HTMLElement).style.opacity = '1';
+              (card as HTMLElement).style.transform = 'translateY(0)';
+            }, index * 200);
+          });
+        }
+      }
     };
 
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [statsAnimated]);
+
+  useEffect(() => {
+    // Video autoplay
     const playVideo = async () => {
       if (videoRef.current) {
         try {
@@ -331,20 +248,15 @@ export default function BayanEvent() {
           videoRef.current.playsInline = true;
           await videoRef.current.play();
         } catch (err) {
-          const playOnInteraction = async () => {
-            try {
-              if (videoRef.current) await videoRef.current.play();
-            } catch (error) {
-              console.error('Video play failed:', error);
-            }
-          };
-          document.addEventListener('click', playOnInteraction, { once: true });
+          console.error('Video autoplay failed:', err);
         }
       }
     };
+    
+    playVideo();
+  }, []);
 
-    setTimeout(playVideo, 3000);
-
+  useEffect(() => {
     // Gallery auto-scroll
     const galleryTrack = galleryTrackRef.current;
     if (galleryTrack) {
@@ -366,8 +278,10 @@ export default function BayanEvent() {
       
       requestAnimationFrame(animateGallery);
     }
+  }, []);
 
-    // GSAP Testimonials Animation
+  useEffect(() => {
+    // Testimonials animation
     let animationFrameId: number;
     
     const animateTestimonials = () => {
@@ -383,21 +297,18 @@ export default function BayanEvent() {
         const speed = 0.5;
 
         const animate = () => {
-          // Column 1: Top to Bottom
           pos1 += speed;
           if (pos1 >= col1.scrollHeight / 2) {
             pos1 = 0;
           }
           col1.style.transform = `translateY(-${pos1}px)`;
 
-          // Column 2: Bottom to Top
           pos2 -= speed;
           if (pos2 <= 0) {
             pos2 = col2.scrollHeight / 2;
           }
           col2.style.transform = `translateY(-${pos2}px)`;
 
-          // Column 3: Top to Bottom
           pos3 += speed;
           if (pos3 >= col3.scrollHeight / 2) {
             pos3 = 0;
@@ -435,7 +346,7 @@ export default function BayanEvent() {
         observer.unobserve(testimonialsRef.current);
       }
     };
-  }, [statsAnimated]);
+  }, []);
 
   const TestimonialCard = ({ testimonial }: { testimonial: any }) => (
     <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 flex-shrink-0">
@@ -451,30 +362,12 @@ export default function BayanEvent() {
       <p className="text-gray-700 text-sm leading-relaxed mb-4">
         {testimonial.quote}
       </p>
-      <div className="flex items-center justify-between text-xs text-gray-500 pt-3 border-t border-gray-100">
-        <div className="flex items-center gap-4">
-        </div>
-      </div>
     </div>
   );
 
   return (
     <div className="text-white overflow-x-hidden scroll-smooth">
-      {/* Preloader */}
-      <div
-        ref={preloaderRef}
-        className="fixed inset-0 z-[9999] flex items-center justify-center"
-        style={{ background: 'linear-gradient(135deg, #d86609ff 0%, #ec8804ff 100%)' }}
-      >
-        <div
-          ref={preloaderTextRef}
-          className="flex items-center justify-center gap-4 text-4xl md:text-7xl lg:text-8xl font-black text-white opacity-0 tracking-tighter"
-        >
-          <span>BAYAN GROUP</span>
-        </div>
-      </div>
-
-      {/* Video Background */}
+      {/* Video Background - Optimized with lower quality for faster loading */}
       <div className="fixed inset-0 -z-20">
         <video
           ref={videoRef}
@@ -483,10 +376,15 @@ export default function BayanEvent() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
+          onEnded={(e) => {
+            const video = e.currentTarget;
+            video.currentTime = 0;
+            video.play();
+          }}
         >
           <source
-            src="https://res.cloudinary.com/djs5pi7ev/video/upload/v1767777003/teaser-hero_qukzh2.mp4"
+            src="https://res.cloudinary.com/djs5pi7ev/video/upload/q_auto:low/v1767777003/teaser-hero_qukzh2.mp4"
             type="video/mp4"
           />
         </video>
@@ -498,9 +396,10 @@ export default function BayanEvent() {
       <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50 opacity-0 translate-y-[-20px] transition-all duration-1000">
         <div className="px-6 py-4 md:px-10 md:py-6 flex justify-between items-center">
           <img
-            src={isWhiteSection ? "https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765491/LOGO_TEMA_belakang_jkkrtc.png" : "https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765525/Bayan_The_Next_Level_e77j8d.png"}
+            src={isWhiteSection ? "https://res.cloudinary.com/djs5pi7ev/image/upload/w_300,q_auto,f_auto/v1767765491/LOGO_TEMA_belakang_jkkrtc.png" : "https://res.cloudinary.com/djs5pi7ev/image/upload/w_300,q_auto,f_auto/v1767765525/Bayan_The_Next_Level_e77j8d.png"}
             alt="BAYAN SC"
             className="h-8 md:h-20 object-contain transition-all duration-500 ease-in-out"
+            loading="eager"
           />
           <nav className={`hidden md:flex gap-8 text-sm font-semibold tracking-wider transition-colors duration-500 ${isWhiteSection ? 'text-blue-900' : 'text-white'}`}>
             <button onClick={() => smoothScrollTo('about')} className={`transition-colors ${isWhiteSection ? 'hover:text-orange-600' : 'hover:text-orange-500'}`}>ABOUT</button>
@@ -620,20 +519,21 @@ export default function BayanEvent() {
             OUR <span className="text-orange-600">Events</span>
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="event-card group relative overflow-hidden opacity-0 translate-y-20 transition-all duration-700">
               <div className="aspect-[4/5] bg-gradient-to-br from-orange-600 to-orange-800 relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500" />
                 <img 
-                  src="https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765503/Bayan-1739_e0mi1r.jpg" 
+                  src="https://res.cloudinary.com/djs5pi7ev/image/upload/w_800,q_auto,f_auto/v1767765503/Bayan-1739_e0mi1r.jpg" 
                   alt="BAYAN OPEN"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  loading="lazy"
                 />
-                <div className="absolute bottom-0 left-0 right-0 p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <h3 className="text-4xl md:text-5xl font-black uppercase mb-4">BAYAN<br/>OPEN</h3>
-                  <p className="text-sm text-white/80 mb-6">Turnamen olahraga tahunan yang mempertemukan atlet terbaik dalam kompetisi penuh semangat.</p>
-                  <a href="/events/bayanopen" className="flex items-center gap-2 text-sm font-bold tracking-wider uppercase hover:gap-4 transition-all">
-                    LEARN MORE <ChevronDown className="rotate-[-90deg] w-4 h-4" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                  <h3 className="text-3xl md:text-4xl font-black uppercase mb-3">BAYAN<br/>OPEN</h3>
+                  <p className="text-xs text-white/80 mb-4">Turnamen olahraga tahunan yang mempertemukan atlet terbaik dalam kompetisi penuh semangat.</p>
+                  <a href="/events/bayanopen" className="flex items-center gap-2 text-xs font-bold tracking-wider uppercase hover:gap-4 transition-all">
+                    SELENGKAPNYA <ChevronDown className="rotate-[-90deg] w-4 h-4" />
                   </a>
                 </div>
               </div>
@@ -643,15 +543,16 @@ export default function BayanEvent() {
               <div className="aspect-[4/5] bg-gradient-to-br from-blue-600 to-blue-800 relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500" />
                 <img 
-                  src="https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765516/20251012060936_-_BOM_7023_uzwd7f.jpg" 
+                  src="https://res.cloudinary.com/djs5pi7ev/image/upload/w_800,q_auto,f_auto/v1767765516/20251012060936_-_BOM_7023_uzwd7f.jpg" 
                   alt="BAYAN RUN"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  loading="lazy"
                 />
-                <div className="absolute bottom-0 left-0 right-0 p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <h3 className="text-4xl md:text-5xl font-black uppercase mb-4">BAYAN<br/>RUN</h3>
-                  <p className="text-sm text-white/80 mb-6">Event running tahunan yang menguji ketahanan dan dedikasi pelari dari berbagai kalangan.</p>
-                  <a href="https://bayanrun.com/" className="flex items-center gap-2 text-sm font-bold tracking-wider uppercase hover:gap-4 transition-all">
-                    LEARN MORE <ChevronDown className="rotate-[-90deg] w-4 h-4" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                  <h3 className="text-3xl md:text-4xl font-black uppercase mb-3">BAYAN<br/>RUN</h3>
+                  <p className="text-xs text-white/80 mb-4">Event running tahunan yang menguji ketahanan dan dedikasi pelari dari berbagai kalangan.</p>
+                  <a href="https://bayanrun.com/" className="flex items-center gap-2 text-xs font-bold tracking-wider uppercase hover:gap-4 transition-all">
+                    SELENGKAPNYA <ChevronDown className="rotate-[-90deg] w-4 h-4" />
                   </a>
                 </div>
               </div>
@@ -661,15 +562,35 @@ export default function BayanEvent() {
               <div className="aspect-[4/5] bg-gradient-to-br from-purple-600 to-pink-600 relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500" />
                 <img 
-                  src="https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765488/Bayan-8827_woaplh.jpg" 
+                  src="https://res.cloudinary.com/djs5pi7ev/image/upload/w_800,q_auto,f_auto/v1767765488/Bayan-8827_woaplh.jpg" 
                   alt="BAYAN CRAFT FESTIVAL"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  loading="lazy"
                 />
-                <div className="absolute bottom-0 left-0 right-0 p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <h3 className="text-4xl md:text-5xl font-black uppercase mb-4">BAYAN<br/>CRAFT</h3>
-                  <p className="text-sm text-white/80 mb-6">Festival tahunan yang mendukung UMKM dan seniman lokal untuk memamerkan karya seni dan budaya.</p>
-                  <a href="#gallery" className="flex items-center gap-2 text-sm font-bold tracking-wider uppercase hover:gap-4 transition-all">
-                    LEARN MORE <ChevronDown className="rotate-[-90deg] w-4 h-4" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                  <h3 className="text-3xl md:text-4xl font-black uppercase mb-3">BAYAN<br/>CRAFT</h3>
+                  <p className="text-xs text-white/80 mb-4">Festival tahunan yang mendukung UMKM dan seniman lokal untuk memamerkan karya seni dan budaya.</p>
+                  <a href="#gallery" className="flex items-center gap-2 text-xs font-bold tracking-wider uppercase hover:gap-4 transition-all">
+                    SELENGKAPNYA <ChevronDown className="rotate-[-90deg] w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="event-card group relative overflow-hidden opacity-0 translate-y-20 transition-all duration-700">
+              <div className="aspect-[4/5] bg-gradient-to-br from-green-600 to-emerald-800 relative overflow-hidden">
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500" />
+                <img 
+                  src="https://res.cloudinary.com/djs5pi7ev/image/upload/w_800,q_auto,f_auto/v1769135304/ALK-4991_lwizwj.jpg" 
+                  alt="BAYAN SOCCER"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  loading="lazy"
+                />
+                <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                  <h3 className="text-3xl md:text-4xl font-black uppercase mb-3">BAYAN<br/>SOCCER </h3>
+                  <p className="text-xs text-white/80 mb-4">Program pelatihan sepak bola untuk mengembangkan bakat muda dan membangun karakter atlet.</p>
+                  <a href="https://bayansoccer.com/" className="flex items-center gap-2 text-xs font-bold tracking-wider uppercase hover:gap-4 transition-all">
+                    SELENGKAPNYA <ChevronDown className="rotate-[-90deg] w-4 h-4" />
                   </a>
                 </div>
               </div>
@@ -687,8 +608,14 @@ export default function BayanEvent() {
             muted
             playsInline
             className="w-full h-full object-cover"
+            preload="none"
+            onEnded={(e) => {
+              const video = e.currentTarget;
+              video.currentTime = 0;
+              video.play();
+            }}
           >
-            <source src="https://res.cloudinary.com/djs5pi7ev/video/upload/v1767777527/teaser-flow_xbhw7p.mp4" type="video/mp4" />
+            <source src="https://res.cloudinary.com/djs5pi7ev/video/upload/q_auto:low/v1767777527/teaser-flow_xbhw7p.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-black/60"></div>
         </div>
@@ -732,9 +659,7 @@ export default function BayanEvent() {
           <p className="text-center text-blue-900 mb-16 font-semibold text-lg">Apa kata mereka tentang Bayan Event</p>
 
           <div className="relative h-[600px]">
-            {/* Desktop: 3 columns with scroll animation */}
             <div className="hidden md:grid md:grid-cols-3 gap-6 h-full">
-              {/* Column 1: Top to Bottom */}
               <div className="overflow-hidden">
                 <div ref={col1Ref} className="flex flex-col gap-6">
                   {[...testimonialsCol1, ...testimonialsCol1].map((testimonial, index) => (
@@ -743,7 +668,6 @@ export default function BayanEvent() {
                 </div>
               </div>
 
-              {/* Column 2: Bottom to Top */}
               <div className="overflow-hidden">
                 <div ref={col2Ref} className="flex flex-col gap-6">
                   {[...testimonialsCol2, ...testimonialsCol2].map((testimonial, index) => (
@@ -752,7 +676,6 @@ export default function BayanEvent() {
                 </div>
               </div>
 
-              {/* Column 3: Top to Bottom */}
               <div className="overflow-hidden">
                 <div ref={col3Ref} className="flex flex-col gap-6">
                   {[...testimonialsCol3, ...testimonialsCol3].map((testimonial, index) => (
@@ -762,16 +685,11 @@ export default function BayanEvent() {
               </div>
             </div>
 
-            {/* Mobile: Simple grid without animation */}
             <div className="grid md:hidden gap-6 overflow-y-auto h-full pb-8">
               {[...testimonialsCol1, ...testimonialsCol2, ...testimonialsCol3].slice(0, 6).map((testimonial, index) => (
                 <TestimonialCard key={`mobile-${index}`} testimonial={testimonial} />
               ))}
             </div>
-
-            {/* Gradient overlays */}
-            <div className="hidden md:block absolute top-0 left-0 right-0 h-32 pointer-events-none z-10"></div>
-            <div className="hidden md:block absolute bottom-0 left-0 right-0 h-32  pointer-events-none z-10"></div>
           </div>
         </div>
       </section>
@@ -788,9 +706,10 @@ export default function BayanEvent() {
             <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105">
               <div className="w-33 h-33 mx-auto mb-6 flex items-center justify-center">
                 <img 
-                  src="https://res.cloudinary.com/djs5pi7ev/image/upload/v1767777423/LOGO_EVENT_Bayan_2025_f8yznc.png" 
+                  src="https://res.cloudinary.com/djs5pi7ev/image/upload/w_400,q_auto,f_auto/v1767777423/LOGO_EVENT_Bayan_2025_f8yznc.png" 
                   alt="Bayan Event 2025"
                   className="w-full h-full object-contain"
+                  loading="lazy"
                 />
               </div>
               <h3 className="text-2xl font-black text-center text-white mb-4">Bayan CraftArt Festival</h3>
@@ -805,9 +724,10 @@ export default function BayanEvent() {
             <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105">
               <div className="w-42 h-42 mx-auto mb-6 flex items-center justify-center">
                 <img 
-                  src="https://res.cloudinary.com/djs5pi7ev/image/upload/v1767777417/LOGO_BR2025_2_ph1bh8.png" 
+                  src="https://res.cloudinary.com/djs5pi7ev/image/upload/w_400,q_auto,f_auto/v1767777417/LOGO_BR2025_2_ph1bh8.png" 
                   alt="Bayan Run 2025"
                   className="w-full h-full object-contain"
+                  loading="lazy"
                 />
               </div>
               <h3 className="text-2xl font-black text-white text-center mb-4">Bayan Run</h3>
@@ -822,9 +742,10 @@ export default function BayanEvent() {
             <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105">
               <div className="w-42 h-42 mx-auto mb-6 flex items-center justify-center">
                 <img 
-                  src="https://res.cloudinary.com/djs5pi7ev/image/upload/v1767777416/LOGO_BO2025_resdzo.png" 
+                  src="https://res.cloudinary.com/djs5pi7ev/image/upload/w_400,q_auto,f_auto/v1767777416/LOGO_BO2025_resdzo.png" 
                   alt="Bayan OPEN 2025"
                   className="w-full h-full object-contain"
+                  loading="lazy"
                 />
               </div>
               <h3 className="text-2xl font-black text-center text-white mb-4">Bayan Open</h3>
@@ -857,6 +778,7 @@ export default function BayanEvent() {
                     src={image}
                     alt={`Gallery ${index + 1}`}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <div className="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
@@ -904,9 +826,10 @@ export default function BayanEvent() {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div className="md:col-span-1">
               <img
-                src="https://res.cloudinary.com/djs5pi7ev/image/upload/v1767765525/Bayan_The_Next_Level_e77j8d.png"
+                src="https://res.cloudinary.com/djs5pi7ev/image/upload/w_300,q_auto,f_auto/v1767765525/Bayan_The_Next_Level_e77j8d.png"
                 alt="BAYAN SC"
                 className="h-16 md:h-20 object-contain mb-4"
+                loading="lazy"
               />
               <p className="text-white/60 text-sm leading-relaxed">
                 Menghadirkan event yang dikelola Bayan Group sejak 2022.
@@ -944,7 +867,6 @@ export default function BayanEvent() {
           
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row font-semibold justify-between items-center gap-4 text-sm text-white/60">
             <div>© 2025 PT BAYAN RESOURCES TBK. All rights reserved.</div>
-            <div>Powered by ICT BAYAN GROUP</div>
           </div>
         </div>
       </footer>
