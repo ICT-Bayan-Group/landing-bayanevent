@@ -3,6 +3,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Instagram, ChevronDown, Linkedin, Mail } from 'lucide-react';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 
 export default function BayanEvent() {
   const headerRef = useRef<HTMLDivElement>(null);
@@ -455,7 +457,7 @@ export default function BayanEvent() {
 
           {/* Loading text */}
           <div className="mt-8 text-black/60 text-xs md:text-sm font-semibold tracking-[0.3em] uppercase animate-pulse">
-            KEEP MOVING • KEEP STRONG
+            THE NEXT LEVEL
           </div>
         </div>
       )}
@@ -485,23 +487,7 @@ export default function BayanEvent() {
       <div className="fixed inset-0 bg-black/60 -z-10" />
 
       {/* Header */}
-      <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50 opacity-0 translate-y-[-20px] transition-all duration-1000">
-        <div className="px-6 py-4 md:px-10 md:py-6 flex justify-between items-center">
-          <img
-            src={isWhiteSection ? "https://res.cloudinary.com/djs5pi7ev/image/upload/w_300,q_auto,f_auto/v1767765491/LOGO_TEMA_belakang_jkkrtc.png" : "https://res.cloudinary.com/djs5pi7ev/image/upload/w_300,q_auto,f_auto/v1767765525/Bayan_The_Next_Level_e77j8d.png"}
-            alt="BAYAN SC"
-            className="h-8 md:h-20 object-contain transition-all duration-500 ease-in-out"
-            loading="eager"
-          />
-          <nav className={`hidden md:flex gap-8 text-sm font-semibold tracking-wider transition-colors duration-500 ${isWhiteSection ? 'text-blue-900' : 'text-white'}`}>
-            <button onClick={() => smoothScrollTo('about')} className={`transition-colors ${isWhiteSection ? 'hover:text-orange-600' : 'hover:text-orange-500'}`}>ABOUT</button>
-            <button onClick={() => smoothScrollTo('events')} className={`transition-colors ${isWhiteSection ? 'hover:text-orange-600' : 'hover:text-orange-500'}`}>EVENTS</button>
-            <button onClick={() => smoothScrollTo('timeline')} className={`transition-colors ${isWhiteSection ? 'hover:text-orange-600' : 'hover:text-orange-500'}`}>TIMELINE</button>
-            <button onClick={() => smoothScrollTo('testimonials')} className={`transition-colors ${isWhiteSection ? 'hover:text-orange-600' : 'hover:text-orange-500'}`}>TESTIMONIALS</button>
-            <button onClick={() => smoothScrollTo('gallery')} className={`transition-colors ${isWhiteSection ? 'hover:text-orange-600' : 'hover:text-orange-500'}`}>GALLERY</button>
-          </nav>
-        </div>
-      </header>
+     <Header currentPage="home" isWhiteSection={isWhiteSection} />
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 md:px-10">
