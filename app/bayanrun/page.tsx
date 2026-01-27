@@ -4,16 +4,20 @@ import { ChevronDown, Trophy, Users, Calendar, MapPin, Instagram, Linkedin, Mail
 import Preloader from '@/components/layout/Preloader';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-
+import RacePackCarousel from '@/components/Racepack';
+import RoutesSection from '@/components/RoutesSection';
+import GalleryRun from '@/components/GalleryRun';
 export default function BayanRun() {
   const [isLoading, setIsLoading] = useState(true);
   const [isWhiteSection, setIsWhiteSection] = useState(false);
   const [stats, setStats] = useState({ runners: 0, distance: 0, years: 0, countries: 0 });
   const [statsAnimated, setStatsAnimated] = useState(false);
 
-  const heroRef = useRef<HTMLElement>(null);
-  const aboutRef = useRef<HTMLElement>(null);
-  const categoriesRef = useRef<HTMLElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const categoriesRef = useRef<HTMLDivElement>(null);
+  const racepackRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const categories = [
     {
@@ -21,7 +25,8 @@ export default function BayanRun() {
       distance: "5K",
       title: "FUN RUN",
       description: "Kategori untuk pemula dan keluarga yang ingin menikmati lari santai",
-      time: "Pukul 06.00 WITA",
+      time: "Pukul 06.10 WITA",
+      cutOff: "1 Jam",
       color: "from-green-400 to-emerald-600"
     },
     {
@@ -29,7 +34,8 @@ export default function BayanRun() {
       distance: "10K",
       title: "CHALLENGE RUN",
       description: "Untuk pelari dengan pengalaman menengah yang siap menghadapi tantangan",
-      time: "Pukul 06.15 WITA",
+      time: "Pukul 06.00 WITA",
+      cutOff: "2 Jam",
       color: "from-blue-400 to-blue-600"
     },
     {
@@ -38,24 +44,33 @@ export default function BayanRun() {
       title: "HALF MARATHON",
       description: "Ajang kompetisi serius untuk pelari berpengalaman dan atlet profesional",
       time: "Pukul 05.30 WITA",
+      cutOff: "4 Jam",
       color: "from-orange-400 to-red-600"
+    },
+    {
+      icon: "👶",
+      distance: "2.5K",
+      title: "KIDS RUN",
+      description: "Dirancang untuk peserta usia 6-12 tahun dengan rute yang aman dan menyenangkan",
+      time: "Pukul 06.20 WITA",
+      cutOff: "50 Menit",
+      color: "from-yellow-300 to-yellow-500"
     }
   ];
 
-  const facilities = [
-    { name: "Race Pack Premium", desc: "Jersey, medali, goodie bag" },
-    { name: "Hydration Station", desc: "10+ pos air minum" },
-    { name: "Medical Team", desc: "Tim medis standby" },
-    { name: "Finish Line Entertainment", desc: "Live music & food festival" },
-    { name: "Official Photography", desc: "Dokumentasi profesional" },
-    { name: "Digital Certificate", desc: "Sertifikat digital untuk finisher" }
-  ];
-
-  const runRoute = [
-    { km: "0-5 KM", location: "Lapangan Merdeka - Jl. Jendral Sudirman" },
-    { km: "5-10 KM", location: "Jl. MT Haryono - Boulevard" },
-    { km: "10-15 KM", location: "Kawasan Kariangau - Tepi Laut" },
-    { km: "15-21 KM", location: "Kembali ke Lapangan Merdeka (21K)" }
+  const eventSchedule = [
+    {
+      title: "Racepack Collection",
+      date: "Sabtu, 11 Oktober 2025",
+      time: "08:00 - 19:00 WITA",
+      location: "Gedung Kesenian Balikpapan"
+    },
+    {
+      title: "Race Day",
+      date: "Minggu, 12 Oktober 2025",
+      time: "05:30 WITA (Start)",
+      location: "Lapangan Merdeka III Balikpapan"
+    }
   ];
 
   const smoothScrollTo = (id: string) => {
@@ -101,9 +116,12 @@ export default function BayanRun() {
       const headerHeight = 80;
       let isInWhite = false;
 
-      if (categoriesRef.current) {
-        const rect = categoriesRef.current.getBoundingClientRect();
-        if (rect.top <= headerHeight && rect.bottom >= headerHeight) {
+      if (categoriesRef.current || racepackRef.current) {
+        const categoriesRect = categoriesRef.current?.getBoundingClientRect();
+        const racepackRect = racepackRef.current?.getBoundingClientRect();
+        
+        if ((categoriesRect && categoriesRect.top <= headerHeight && categoriesRect.bottom >= headerHeight) ||
+            (racepackRect && racepackRect.top <= headerHeight && racepackRect.bottom >= headerHeight)) {
           isInWhite = true;
         }
       }
@@ -125,7 +143,7 @@ export default function BayanRun() {
   }, [statsAnimated]);
 
   return (
-   <div className="text-white overflow-x-hidden">
+    <div className="text-white overflow-x-hidden">
       {isLoading && (
         <Preloader
           logoSrc="https://res.cloudinary.com/djs5pi7ev/image/upload/w_400,q_auto,f_auto/v1767777417/LOGO_BR2025_2_ph1bh8.png"
@@ -138,15 +156,28 @@ export default function BayanRun() {
 
       {/* Hero Section */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center px-6 md:px-10">
-        <div className="absolute inset-0 -z-10">
-          <img
-            src="https://res.cloudinary.com/djs5pi7ev/image/upload/w_1920,q_auto,f_auto/v1767765516/20251012060936_-_BOM_7023_uzwd7f.jpg"
-            alt="Bayan Run"
-            className="w-full h-full object-cover"
+       <div className="fixed inset-0 -z-20">
+        <video
+          ref={videoRef}
+          className="w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          onEnded={(e) => {
+            const video = e.currentTarget;
+            video.currentTime = 0;
+            video.play();
+          }}
+        >
+          <source
+            src="https://res.cloudinary.com/djs5pi7ev/video/upload/q_auto:low/v1769479898/bayanrun-video_ifpuhz.mp4"
+            type="video/mp4"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div>
-        </div>
-
+        </video>
+      </div>
+           <div className="fixed inset-0 bg-black/60 -z-10" />
         <div className="max-w-7xl w-full text-center">
           <div className="mb-8">
             <img
@@ -155,13 +186,6 @@ export default function BayanRun() {
               className="h-40 md:h-60 mx-auto object-contain"
             />
           </div>
-          
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter mb-6" style={{ textShadow: '0 20px 60px rgba(0,0,0,0.8)' }}>
-            BAYAN RUN
-            <br />
-            <span className="text-orange-600">2025</span>
-          </h1>
-
           <p className="text-sm md:text-lg text-white/90 font-semibold tracking-wider uppercase mb-8 max-w-3xl mx-auto">
             KEEP MOVING • KEEP STRONG
           </p>
@@ -203,11 +227,13 @@ export default function BayanRun() {
           </h2>
 
           <p className="text-base md:text-lg text-white/90 leading-relaxed mb-12 max-w-4xl">
-            <span className="font-bold text-orange-500">BAYAN RUN</span> adalah event lari tahunan yang telah menjadi bagian integral dari kalender olahraga Balikpapan sejak 2022. Lebih dari sekadar lomba lari, BAYAN RUN adalah perayaan semangat, kesehatan, dan komunitas yang terus berkembang.
+            <span className="font-bold text-orange-500">BAYAN RUN</span> adalah ajang lomba lari tahunan persembahan dari PT Bayan Resources Tbk yang kini telah menginjak tahun keempat penyelenggaraan sejak pertama kali diselenggarakan pada tahun 2022 di Balikpapan.
             <br /><br />
-            Dengan rute yang melewati landmark-landmark ikonik Balikpapan, dari Lapangan Merdeka hingga kawasan tepi laut Kariangau, peserta tidak hanya menguji ketahanan fisik mereka tetapi juga menikmati keindahan kota dari perspektif yang berbeda.
+            BAYAN RUN 2025 akan diselenggarakan di Lapangan Merdeka 3 Balikpapan pada tanggal 12 Oktober 2025. Event ini merupakan wujud komitmen PT Bayan Resources Tbk terhadap kesehatan serta kesejahteraan masyarakat.
             <br /><br />
-            Kami percaya bahwa lari bukan hanya tentang kecepatan atau jarak, tetapi tentang perjalanan pribadi setiap individu untuk menjadi versi terbaik dari diri mereka sendiri. Dengan moto <span className="font-bold text-orange-500">"KEEP MOVING • KEEP STRONG"</span>, kami mengajak semua orang dari berbagai latar belakang untuk bergabung dalam gerakan hidup sehat dan aktif.
+            Melalui BAYAN RUN 2025 peserta ditantang untuk menunjukkan kecepatan, daya tahan, dan semangat juang yang tinggi. Dengan persaingan yang sengit serta semangat untuk mencapai tujuan, menjadikan setiap langkah merupakan bukti dedikasi dan latihan keras.
+            <br /><br />
+            Mari Bersama membangun bangsa dengan menjadi bagian dari <span className="font-bold text-orange-500">BAYAN RUN 2025</span>.
           </p>
 
           {/* Stats */}
@@ -216,7 +242,7 @@ export default function BayanRun() {
               <div className="text-5xl md:text-7xl font-black text-orange-600 mb-3 group-hover:text-orange-500 transition-colors">
                 {stats.runners}+
               </div>
-              <div className="text-sm md:text-base text-white/70 font-semibold tracking-wider uppercase">Pelari</div>
+              <div className="text-sm md:text-base text-white/70 font-semibold tracking-wider uppercase">Target Pelari</div>
             </div>
             <div className="text-center group hover:scale-105 transition-transform">
               <div className="text-5xl md:text-7xl font-black text-orange-600 mb-3 group-hover:text-orange-500 transition-colors">
@@ -246,82 +272,72 @@ export default function BayanRun() {
           <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 text-center text-blue-900">
             PILIH <span className="text-orange-600">KATEGORI</span>
           </h2>
-          <p className="text-center text-blue-900 mb-16 font-semibold text-lg">Temukan kategori yang sesuai dengan level Anda</p>
+          <p className="text-center text-blue-900/70 mb-16 font-semibold text-lg">Temukan kategori yang sesuai dengan level Anda</p>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {categories.map((category, index) => (
               <div key={index} className={`bg-gradient-to-br ${category.color} p-8 rounded-2xl text-white hover:scale-105 transition-all duration-300 hover:shadow-2xl`}>
                 <div className="text-6xl mb-4">{category.icon}</div>
                 <div className="text-4xl font-black mb-2">{category.distance}</div>
                 <h3 className="text-2xl font-black mb-4 uppercase">{category.title}</h3>
-                <p className="text-white/90 mb-4 leading-relaxed">{category.description}</p>
-                <div className="flex items-center gap-2 text-sm font-semibold">
-                  <Clock className="w-4 h-4" />
-                  {category.time}
+                <p className="text-white/90 mb-4 leading-relaxed text-sm">{category.description}</p>
+                <div className="space-y-2 text-sm font-semibold">
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4" />
+                    <span>{category.time}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Trophy className="w-4 h-4" />
+                    <span>COT: {category.cutOff}</span>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-
-          {/* Facilities */}
-          <div className="mt-20">
-            <h3 className="text-3xl md:text-5xl font-black uppercase text-center text-blue-900 mb-12">
-              FASILITAS <span className="text-orange-600">LENGKAP</span>
-            </h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              {facilities.map((facility, index) => (
-                <div key={index} className="bg-gradient-to-br from-blue-50 to-orange-50 p-6 rounded-xl border-2 border-blue-100 hover:border-orange-500 transition-all duration-300">
-                  <h4 className="text-xl font-black text-blue-900 mb-2">{facility.name}</h4>
-                  <p className="text-blue-900/70 font-semibold">{facility.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* Route Section */}
-      <section id="route" className="relative min-h-screen px-6 md:px-10 py-20 bg-gradient-to-br from-orange-600 to-orange-500">
+      {/* Event Schedule Section */}
+      <section className="relative px-6 md:px-10 py-20 bg-gradient-to-br from-orange-600 to-orange-500">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 text-center text-white">
-            RUTE <span className="text-blue-900">LARI</span>
+            EVENT <span className="text-blue-900">SCHEDULE</span>
           </h2>
-          <p className="text-center text-white/90 mb-16 text-lg font-semibold">Menelusuri keindahan Balikpapan</p>
+          <p className="text-center text-white/90 mb-16 text-lg font-semibold">Jangan lewatkan jadwal penting BAYAN RUN 2025</p>
 
-          <div className="relative">
-            {/* Route Line */}
-            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-white/30 hidden md:block"></div>
-
-            <div className="space-y-8">
-              {runRoute.map((route, index) => (
-                <div key={index} className="relative">
-                  <div className="flex items-start gap-6 md:gap-0">
-                    {/* Point */}
-                    <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-8 h-8 bg-white rounded-full border-4 border-orange-600 z-10"></div>
-                    
-                    <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right md:pr-16' : 'md:pl-16 md:ml-auto'} md:w-1/2`}>
-                      <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20">
-                        <div className="text-2xl font-black text-white mb-2">{route.km}</div>
-                        <p className="text-white/90 font-semibold">{route.location}</p>
-                      </div>
-                    </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            {eventSchedule.map((event, index) => (
+              <div key={index} className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20">
+                <h3 className="text-3xl font-black text-white mb-4 uppercase">{event.title}</h3>
+                <div className="space-y-3 text-white/90 font-semibold">
+                  <div className="flex items-start gap-3">
+                    <Calendar className="w-5 h-5 text-white mt-1 flex-shrink-0" />
+                    <span>{event.date}</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Clock className="w-5 h-5 text-white mt-1 flex-shrink-0" />
+                    <span>{event.time}</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <MapPin className="w-5 h-5 text-white mt-1 flex-shrink-0" />
+                    <span>{event.location}</span>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-16 text-center">
-            <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 inline-block">
-              <Heart className="w-12 h-12 text-white mx-auto mb-4" />
-              <h3 className="text-2xl font-black text-white mb-2">SCENIC ROUTE</h3>
-              <p className="text-white/90 font-semibold max-w-2xl">
-                Rute dirancang untuk memberikan pengalaman lari terbaik dengan pemandangan kota yang menakjubkan
-              </p>
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
+
+      {/* Routes Section */}
+      <RoutesSection />
+
+      <GalleryRun />
+
+      {/* Race Pack Section */}
+      <div ref={racepackRef}>
+        <RacePackCarousel />
+      </div>
 
       {/* CTA Section */}
       <section className="relative min-h-[60vh] px-6 md:px-10 py-20 bg-blue-950 flex items-center justify-center">

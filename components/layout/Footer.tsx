@@ -17,9 +17,9 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div className="md:col-span-1">
             <img
-              src="https://res.cloudinary.com/djs5pi7ev/image/upload/w_300,q_auto,f_auto/v1767765525/Bayan_The_Next_Level_e77j8d.png"
-              alt="BAYAN SC"
-              className="h-16 md:h-20 object-contain mb-4"
+              src="https://res.cloudinary.com/djs5pi7ev/image/upload/v1769476664/bayan-thenext-white-nobg_qis407.png"
+              alt="BAYAN tes"
+              className="h-16 md:h-10 object-contain mb-4"
               loading="lazy"
             />
             <p className="text-white/60 text-sm leading-relaxed">
