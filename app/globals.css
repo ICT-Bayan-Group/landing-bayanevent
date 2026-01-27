@@ -17,13 +17,37 @@
 }
 
 @layer base {
-  body {
-    overflow-x: hidden;
+  /* CRITICAL: Reset all margins and paddings */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
 
-  * {
+  html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    max-width: 100vw;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    max-width: 100vw;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Next.js specific resets */
+  #__next {
+    margin: 0;
+    padding: 0;
+    width: 100%;
   }
 }
 

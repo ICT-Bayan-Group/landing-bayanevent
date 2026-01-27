@@ -1,31 +1,51 @@
 "use client";
 import { useEffect, useRef, useState } from 'react';
-import { ChevronDown, Trophy, Users, Calendar, MapPin, Instagram, Linkedin, Mail } from 'lucide-react';
+import { ChevronDown, Trophy, Users, Calendar, MapPin, Instagram, Linkedin, Mail, Star } from 'lucide-react';
 import Header from '@/components/layout/Header';
 import Preloader from '@/components/layout/Preloader';
 import Footer from '@/components/layout/Footer';
+import VideoSection from '@/components/OpenVideo';
+
 export default function BayanOpen() {
     const [isLoading, setIsLoading] = useState(true);
   const [isWhiteSection, setIsWhiteSection] = useState(false);
   const [stats, setStats] = useState({ matches: 0, teams: 0, prize: 0, spectators: 0 });
   const [statsAnimated, setStatsAnimated] = useState(false);
-
+  const videoRef = useRef<HTMLVideoElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const aboutRef = useRef<HTMLElement>(null);
   const categoriesRef = useRef<HTMLElement>(null);
 
   const categories = [
     {
-      title: "KATEGORI USIA",
-      items: ["U-10 (Usia 10 tahun ke bawah)", "U-12 (Usia 12 tahun ke bawah)", "U-14 (Usia 14 tahun ke bawah)", "U-16 (Usia 16 tahun ke bawah)"]
+      title: "KATEGORI OPEN",
+      items: [
+        "Ganda Dewasa Putra/Putri",
+        "Ganda Veteran Putra",
+        "Beregu Putra Se-Kota Balikpapan"
+      ]
     },
     {
-      title: "SISTEM PERTANDINGAN",
-      items: ["Sistem gugur", "2 babak @ 25 menit", "Wasit berlisensi resmi", "Mengikuti aturan PBSI"]
+      title: "KATEGORI SIRKUIT NASIONAL C",
+      subtitle: "TUNGGAL",
+      items: [
+        "Usia Dini Putra/Putri",
+        "Anak-anak Putra/Putri",
+        "Pemula Putra/Putri",
+        "Remaja Putra/Putri",
+        "Taruna Putra/Putri"
+      ]
     },
     {
-      title: "FASILITAS",
-      items: ["Lapangan standar internasional", "Medical team standby", "Area istirahat pemain", "Shuttle berkualitas tinggi"]
+      title: "KATEGORI SIRKUIT NASIONAL C",
+      subtitle: "GANDA",
+      items: [
+        "Pemula Putra/Putri",
+        "Remaja Putra/Putri",
+        "Remaja Campuran",
+        "Taruna Putra/Putri",
+        "Taruna Campuran"
+      ]
     }
   ];
 
@@ -40,6 +60,44 @@ export default function BayanOpen() {
     { place: "JUARA 1", prize: "Trophy + Uang Pembinaan 10 Juta", color: "from-yellow-400 to-yellow-600" },
     { place: "JUARA 2", prize: "Trophy + Uang Pembinaan 7 Juta", color: "from-gray-300 to-gray-400" },
     { place: "JUARA 3", prize: "Trophy + Uang Pembinaan 5 Juta", color: "from-orange-400 to-orange-600" }
+  ];
+
+  const legends = [
+    {
+      name: "Hendra Setiawan",
+      title: "Legenda Ganda Putra Indonesia",
+      image: "https://res.cloudinary.com/djs5pi7ev/image/upload/v1769503892/hendrasetiawan_llcznh.jpg",
+      achievements: [
+        "Juara Olimpiade 2016 (Rio)",
+        "Juara Dunia 2013, 2015, 2019",
+        "Juara All England 8x",
+        "Pemain dengan prestasi terlengkap di Indonesia"
+      ]
+    },
+    {
+      name: "Marcus Fernaldi Gideon",
+      title: "The Young Legend",
+      image: "https://res.cloudinary.com/djs5pi7ev/image/upload/v1769503893/marcus_q9noxl.jpg",
+      achievements: [
+        "Juara Dunia 2017, 2019, 2021",
+        "Juara All England 2018",
+        "Peringkat 1 Dunia BWF",
+        "Pasangan terkuat bersama Kevin Sanjaya"
+      ]
+    }
+  ];
+
+  const venues = [
+    {
+      name: "BSCC Dome",
+      description: "Venue utama dengan lapangan standar internasional",
+      facilities: ["Lapangan standar internasional", "Kapasitas 3000+ penonton", "Medical team standby", "Area VIP dan tribun nyaman"]
+    },
+    {
+      name: "GOR Hevindo",
+      description: "Venue pendukung untuk kategori preliminaries",
+      facilities: ["Lapangan berkualitas tinggi", "Area istirahat pemain", "Shuttle berkualitas tinggi", "Wasit berlisensi resmi"]
+    }
   ];
 
   const smoothScrollTo = (id: string) => {
@@ -122,14 +180,27 @@ export default function BayanOpen() {
 
       {/* Hero Section */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center px-6 md:px-10">
-        <div className="absolute inset-0 -z-10">
-          <img
-            src="https://res.cloudinary.com/djs5pi7ev/image/upload/w_1920,q_auto,f_auto/v1767765503/Bayan-1739_e0mi1r.jpg"
-            alt="Bayan Open"
-            className="w-full h-full object-cover"
+       <div className="fixed inset-0 -z-20">
+        <video
+          ref={videoRef}
+          className="w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          onEnded={(e) => {
+            const video = e.currentTarget;
+            video.currentTime = 0;
+            video.play();
+          }}
+        >
+          <source
+            src="https://res.cloudinary.com/djs5pi7ev/video/upload/q_auto:low/v1769502814/bayanopen-hero_iqhyip.mp4"
+            type="video/mp4"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div>
-        </div>
+        </video>
+      </div>
 
         <div className="max-w-7xl w-full text-center">
           <div className="mb-8">
@@ -139,13 +210,6 @@ export default function BayanOpen() {
               className="h-40 md:h-60 mx-auto object-contain"
             />
           </div>
-          
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter mb-6" style={{ textShadow: '0 20px 60px rgba(0,0,0,0.8)' }}>
-            BAYAN OPEN
-            <br />
-            <span className="text-orange-600">SIRNAS C 2025</span>
-          </h1>
-
           <p className="text-sm md:text-lg text-white/90 font-semibold tracking-wider uppercase mb-8 max-w-3xl mx-auto">
             Turnamen Bulu Tangkis Bergengsi Tingkat Nasional
           </p>
@@ -187,7 +251,9 @@ export default function BayanOpen() {
             <br /><br />
             Dengan status <span className="font-bold text-orange-500">SIRNAS C (Sirkuit Nasional C)</span> yang diakui oleh PBSI (Persatuan Bulu Tangkis Seluruh Indonesia), BAYAN OPEN 2025 menjadi platform penting bagi para pemain muda untuk mengasah kemampuan, meraih prestasi, dan mendapatkan poin peringkat nasional.
             <br /><br />
-            Turnamen ini tidak hanya tentang kompetisi, tetapi juga tentang membangun karakter, sportivitas, dan semangat juang yang tinggi. Kami berkomitmen untuk terus mendukung pengembangan olahraga bulu tangkis di Indonesia, khususnya di Kalimantan Timur.
+            Turnamen ini tidak hanya tentang kompetisi, tetapi juga tentang membangun karakter, sportivitas, dan semangat juang yang tinggi. Klub-klub besar seperti <span className="font-bold text-orange-500">PB Djarum, PB Jaya Raya, dan PB Exist</span> turut berlaga, menjadikan turnamen ini ajang pembuktian sekaligus batu loncatan menuju level nasional dan internasional.
+            <br /><br />
+            Pengcab PBSI Balikpapan menilai kehadiran turnamen ini menjadi kesempatan emas bagi atlet lokal. Minimnya kejuaraan skala nasional di Kalimantan membuat Bayan Open menjadi ajang penting untuk menambah pengalaman bertanding sekaligus mengejar poin ke pelatnas.
           </p>
 
           {/* Stats */}
@@ -220,18 +286,71 @@ export default function BayanOpen() {
         </div>
       </section>
 
+      {/* Our Legends Section */}
+      <section className="relative min-h-screen px-6 md:px-10 py-20 bg-gradient-to-br from-red-900 to-red-950">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 text-white">
+              OUR <span className="text-orange-600">LEGENDS</span>
+            </h2>
+            <p className="text-white/80 text-lg font-semibold">Legenda Bulutangkis Indonesia di Bayan Open 2025</p>
+            <div className="flex items-center justify-center gap-2 mt-4">
+              <span className="text-orange-500 text-lg font-bold">Coaching Clinic & Exhibition Match</span>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+            {legends.map((legend, index) => (
+              <div key={index} className="bg-white/5 backdrop-blur-md rounded-3xl overflow-hidden border border-white/10 hover:border-orange-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+                <div className="aspect-[4/5] relative overflow-hidden bg-gradient-to-br from-blue-800 to-blue-900">
+                  <img 
+                    src={legend.image}
+                    alt={legend.name}
+                    className="w-full h-full object-cover"
+                  />
+                  
+                </div>
+                <div className="p-8">
+                  <h3 className="text-3xl font-black text-white mb-2">{legend.name}</h3>
+                  <p className="text-orange-500 font-bold text-lg mb-6">{legend.title}</p>
+                  <div className="space-y-3">
+                    {legend.achievements.map((achievement, i) => (
+                      <div key={i} className="flex items-start gap-3 text-white/80">
+                        <Trophy className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
+                        <span className="font-semibold">{achievement}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <div className="bg-orange-600/20 backdrop-blur-md border border-orange-500/30 rounded-2xl p-8 max-w-4xl mx-auto">
+              <p className="text-white text-lg leading-relaxed">
+                Kedua legenda ini akan memberikan <span className="font-bold text-orange-500">motivasi langsung</span> kepada para peserta, menggelar <span className="font-bold text-orange-500">coaching clinic eksklusif</span>, dan menampilkan <span className="font-bold text-orange-500">laga ekshibisi</span> yang menghibur sekaligus menginspirasi generasi muda atlet bulutangkis Indonesia.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Categories Section */}
       <section id="categories" ref={categoriesRef} className="relative min-h-screen px-6 md:px-10 py-20 bg-white">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 text-center text-blue-900">
-            KATEGORI & <span className="text-orange-600">KETENTUAN</span>
+            KATEGORI <span className="text-orange-600">PERTANDINGAN</span>
           </h2>
-          <p className="text-center text-blue-900 mb-16 font-semibold text-lg">Informasi lengkap tentang kategori dan aturan pertandingan</p>
+          <p className="text-center text-blue-900 mb-16 font-semibold text-lg">18 Kategori dengan Standar PBSI</p>
 
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {categories.map((category, index) => (
               <div key={index} className="bg-gradient-to-br from-blue-50 to-orange-50 p-8 rounded-2xl border-2 border-blue-100 hover:border-orange-500 transition-all duration-300 hover:scale-105 hover:shadow-xl">
-                <h3 className="text-2xl font-black text-blue-900 mb-6 uppercase">{category.title}</h3>
+                <h3 className="text-2xl font-black text-blue-900 mb-2 uppercase">{category.title}</h3>
+                {category.subtitle && (
+                  <p className="text-orange-600 font-bold text-lg mb-4">{category.subtitle}</p>
+                )}
                 <ul className="space-y-3">
                   {category.items.map((item, i) => (
                     <li key={i} className="flex items-start gap-3 text-blue-900">
@@ -242,6 +361,30 @@ export default function BayanOpen() {
                 </ul>
               </div>
             ))}
+          </div>
+
+          {/* Venues */}
+          <div className="mb-16">
+            <h3 className="text-3xl md:text-5xl font-black uppercase text-center text-blue-900 mb-12">
+              VENUE <span className="text-orange-600">PERTANDINGAN</span>
+            </h3>
+            <div className="grid md:grid-cols-2 gap-8">
+              {venues.map((venue, index) => (
+                <div key={index} className="bg-gradient-to-br from-blue-900 to-blue-950 p-8 rounded-2xl text-white hover:scale-105 transition-all duration-300 hover:shadow-2xl">
+                  <MapPin className="w-12 h-12 text-orange-500 mb-4" />
+                  <h4 className="text-2xl font-black mb-3">{venue.name}</h4>
+                  <p className="text-white/80 mb-6 font-semibold">{venue.description}</p>
+                  <ul className="space-y-2">
+                    {venue.facilities.map((facility, i) => (
+                      <li key={i} className="flex items-start gap-3 text-white/70">
+                        <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <span className="font-medium">{facility}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Prizes */}
@@ -258,13 +401,15 @@ export default function BayanOpen() {
                 </div>
               ))}
             </div>
-            <p className="text-center text-blue-900 mt-8 font-semibold">* Setiap kategori usia</p>
+            <p className="text-center text-blue-900 mt-8 font-semibold">* Setiap kategori pertandingan</p>
           </div>
         </div>
       </section>
+      
+      <VideoSection />
 
       {/* Timeline Section */}
-      <section id="timeline" className="relative min-h-screen px-6 md:px-10 py-20 bg-gradient-to-br from-orange-600 to-orange-500">
+      <section id="timeline" className="relative min-h-screen px-6 md:px-10 py-20 bg-gradient-to-br from-yellow-400 to-yellow-600">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 text-center text-white">
             TIMELINE <span className="text-blue-900">EVENT</span>
@@ -290,7 +435,7 @@ export default function BayanOpen() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative min-h-[60vh] px-6 md:px-10 py-20 bg-blue-950 flex items-center justify-center">
+      <section className="relative min-h-[60vh] px-6 md:px-10 py-20  flex items-center justify-center">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white mb-6">
             SIAP MENJADI<br />

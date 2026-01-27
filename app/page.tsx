@@ -430,7 +430,7 @@ export default function BayanEvent() {
           <div className="relative">
             <img
               ref={preloaderLogoRef}
-              src="https://res.cloudinary.com/djs5pi7ev/image/upload/w_300,q_auto,f_auto/v1767765491/LOGO_TEMA_belakang_jkkrtc.png"
+              src="https://res.cloudinary.com/djs5pi7ev/image/upload/v1769476663/bayan-thenextlevel-black-nobg_jcttwa.png"
               alt="Bayan Logo"
               className="w-48 md:w-64 h-auto object-contain transition-all duration-500 ease-out"
               style={{ filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.3))' }}
