@@ -610,7 +610,7 @@ export default function BayanEvent() {
                 <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                   <h3 className="text-3xl md:text-4xl font-black uppercase mb-3">BAYAN<br/>OPEN</h3>
                   <p className="text-xs text-white/80 mb-4">Turnamen olahraga tahunan yang mempertemukan atlet terbaik dalam kompetisi penuh semangat.</p>
-                  <a href="/events/bayanopen" className="flex items-center gap-2 text-xs font-bold tracking-wider uppercase hover:gap-4 transition-all">
+                  <a href="/bayanopen" className="flex items-center gap-2 text-xs font-bold tracking-wider uppercase hover:gap-4 transition-all">
                     SELENGKAPNYA <ChevronDown className="rotate-[-90deg] w-4 h-4" />
                   </a>
                 </div>
@@ -629,7 +629,7 @@ export default function BayanEvent() {
                 <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                   <h3 className="text-3xl md:text-4xl font-black uppercase mb-3">BAYAN<br/>RUN</h3>
                   <p className="text-xs text-white/80 mb-4">Event running tahunan yang menguji ketahanan dan dedikasi pelari dari berbagai kalangan.</p>
-                  <a href="https://bayanrun.com/" className="flex items-center gap-2 text-xs font-bold tracking-wider uppercase hover:gap-4 transition-all">
+                  <a href="/bayanrun" className="flex items-center gap-2 text-xs font-bold tracking-wider uppercase hover:gap-4 transition-all">
                     SELENGKAPNYA <ChevronDown className="rotate-[-90deg] w-4 h-4" />
                   </a>
                 </div>
@@ -648,7 +648,7 @@ export default function BayanEvent() {
                 <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                   <h3 className="text-3xl md:text-4xl font-black uppercase mb-3">BAYAN<br/>CRAFT</h3>
                   <p className="text-xs text-white/80 mb-4">Festival tahunan yang mendukung UMKM dan seniman lokal untuk memamerkan karya seni dan budaya.</p>
-                  <a href="#gallery" className="flex items-center gap-2 text-xs font-bold tracking-wider uppercase hover:gap-4 transition-all">
+                  <a href="/bayancraft" className="flex items-center gap-2 text-xs font-bold tracking-wider uppercase hover:gap-4 transition-all">
                     SELENGKAPNYA <ChevronDown className="rotate-[-90deg] w-4 h-4" />
                   </a>
                 </div>
