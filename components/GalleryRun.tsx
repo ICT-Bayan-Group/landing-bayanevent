@@ -43,7 +43,7 @@ const GallerySection = () => {
         {/* Heading */}
         <h2 className="text-3xl lg:text-5xl max-w-[950px] mt-10 text-white">
           <span className="inline-block text-xl lg:text-2xl font-bold -translate-y-5 mr-20 lg:mr-[400px] overflow-hidden gallery-title text-orange-500">
-            <span className="block uppercase tracking-wider font-bold">Galeri Kami</span>
+            <span className="block uppercase tracking-wider">Galeri Kami</span>
           </span>
           <span className="gallery-bio">
             {galleryText.split(" ").map((word, idx) => (

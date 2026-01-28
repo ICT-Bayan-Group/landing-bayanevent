@@ -1,13 +1,14 @@
 "use client";
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { ChevronDown, Trophy, Users, Calendar, MapPin, Instagram, Linkedin, Mail, Star } from 'lucide-react';
 import Header from '@/components/layout/Header';
 import Preloader from '@/components/layout/Preloader';
 import Footer from '@/components/layout/Footer';
 import VideoSection from '@/components/OpenVideo';
+import Image from 'next/image';
 
 export default function BayanOpen() {
-    const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [isWhiteSection, setIsWhiteSection] = useState(false);
   const [stats, setStats] = useState({ matches: 0, teams: 0, prize: 0, spectators: 0 });
   const [statsAnimated, setStatsAnimated] = useState(false);
@@ -66,7 +67,7 @@ export default function BayanOpen() {
     {
       name: "Hendra Setiawan",
       title: "Legenda Ganda Putra Indonesia",
-      image: "https://res.cloudinary.com/djs5pi7ev/image/upload/v1769503892/hendrasetiawan_llcznh.jpg",
+      image: "https://res.cloudinary.com/djs5pi7ev/image/upload/w_600,h_750,c_fill,g_face,q_auto:good,f_auto/v1769503892/hendrasetiawan_llcznh.jpg",
       achievements: [
         "Juara Olimpiade 2016 (Rio)",
         "Juara Dunia 2013, 2015, 2019",
@@ -77,7 +78,7 @@ export default function BayanOpen() {
     {
       name: "Marcus Fernaldi Gideon",
       title: "The Young Legend",
-      image: "https://res.cloudinary.com/djs5pi7ev/image/upload/v1769503893/marcus_q9noxl.jpg",
+      image: "https://res.cloudinary.com/djs5pi7ev/image/upload/w_600,h_750,c_fill,g_face,q_auto:good,f_auto/v1769503893/marcus_q9noxl.jpg",
       achievements: [
         "Juara Dunia 2017, 2019, 2021",
         "Juara All England 2018",
@@ -100,7 +101,7 @@ export default function BayanOpen() {
     }
   ];
 
-  const smoothScrollTo = (id: string) => {
+  const smoothScrollTo = useCallback((id: string) => {
     const element = document.getElementById(id);
     if (element) {
       const headerHeight = 80;
@@ -108,9 +109,9 @@ export default function BayanOpen() {
       const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
-  };
+  }, []);
 
-  const animateStats = () => {
+  const animateStats = useCallback(() => {
     const targets = { matches: 150, teams: 80, prize: 100, spectators: 5000 };
     const duration = 2000;
     const startTime = performance.now();
@@ -135,79 +136,92 @@ export default function BayanOpen() {
     };
 
     requestAnimationFrame(animate);
-  };
+  }, []);
 
   useEffect(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      const windowHeight = window.innerHeight;
-      const headerHeight = 80;
-      let isInWhite = false;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const windowHeight = window.innerHeight;
+          const headerHeight = 80;
+          let isInWhite = false;
 
-      if (categoriesRef.current) {
-        const rect = categoriesRef.current.getBoundingClientRect();
-        if (rect.top <= headerHeight && rect.bottom >= headerHeight) {
-          isInWhite = true;
-        }
-      }
+          if (categoriesRef.current) {
+            const rect = categoriesRef.current.getBoundingClientRect();
+            if (rect.top <= headerHeight && rect.bottom >= headerHeight) {
+              isInWhite = true;
+            }
+          }
 
-      setIsWhiteSection(isInWhite);
+          setIsWhiteSection(isInWhite);
 
-      if (aboutRef.current) {
-        const aboutTop = aboutRef.current.getBoundingClientRect().top;
-        if (aboutTop < windowHeight * 0.75 && !statsAnimated) {
-          animateStats();
-          setStatsAnimated(true);
-        }
+          if (aboutRef.current && !statsAnimated) {
+            const aboutTop = aboutRef.current.getBoundingClientRect().top;
+            if (aboutTop < windowHeight * 0.75) {
+              animateStats();
+              setStatsAnimated(true);
+            }
+          }
+          
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [statsAnimated]);
+  }, [statsAnimated, animateStats]);
 
   return (
-   <div className="text-white overflow-x-hidden">
-         {isLoading && (
-           <Preloader
-             logoSrc="https://res.cloudinary.com/djs5pi7ev/image/upload/w_400,q_auto,f_auto/v1767777416/LOGO_BO2025_resdzo.png"
-             logoAlt="Bayan Open 2025"
-             onComplete={() => setIsLoading(false)}
-           />
-         )}
+    <div className="text-white overflow-x-hidden">
+      {isLoading && (
+        <Preloader
+          logoSrc="https://res.cloudinary.com/djs5pi7ev/image/upload/w_400,q_auto,f_auto/v1767777416/LOGO_BO2025_resdzo.png"
+          logoAlt="Bayan Open 2025"
+          onComplete={() => setIsLoading(false)}
+        />
+      )}
    
-         <Header isWhiteSection={isWhiteSection} currentPage="bayanopen" />
+      <Header isWhiteSection={isWhiteSection} currentPage="bayanopen" />
 
       {/* Hero Section */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center px-6 md:px-10">
-       <div className="fixed inset-0 -z-20">
-        <video
-          ref={videoRef}
-          className="w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          onEnded={(e) => {
-            const video = e.currentTarget;
-            video.currentTime = 0;
-            video.play();
-          }}
-        >
-          <source
-            src="https://res.cloudinary.com/djs5pi7ev/video/upload/q_auto:low/v1769502814/bayanopen-hero_iqhyip.mp4"
-            type="video/mp4"
-          />
-        </video>
-      </div>
+        <div className="fixed inset-0 -z-20">
+          <video
+            ref={videoRef}
+            className="w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="https://res.cloudinary.com/djs5pi7ev/image/upload/w_1920,q_auto:low,f_auto/v1769502814/bayanopen-hero_iqhyip.jpg"
+            onEnded={(e) => {
+              const video = e.currentTarget;
+              video.currentTime = 0;
+              video.play();
+            }}
+          >
+            <source
+              src="https://res.cloudinary.com/djs5pi7ev/video/upload/q_auto:low,w_1920/v1769502814/bayanopen-hero_iqhyip.mp4"
+              type="video/mp4"
+            />
+          </video>
+        </div>
 
         <div className="max-w-7xl w-full text-center">
           <div className="mb-8">
-            <img
+            <Image
               src="https://res.cloudinary.com/djs5pi7ev/image/upload/w_400,q_auto,f_auto/v1767777416/LOGO_BO2025_resdzo.png"
               alt="Bayan Open 2025"
-              className="h-40 md:h-60 mx-auto object-contain"
+              width={400}
+              height={240}
+              className="h-40 md:h-60 w-auto mx-auto object-contain"
+              priority
             />
           </div>
           <p className="text-sm md:text-lg text-white/90 font-semibold tracking-wider uppercase mb-8 max-w-3xl mx-auto">
@@ -258,25 +272,25 @@ export default function BayanOpen() {
 
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            <div className="text-center group hover:scale-105 transition-transform">
+            <div className="text-center group hover:scale-105 transition-transform will-change-transform">
               <div className="text-5xl md:text-7xl font-black text-orange-600 mb-3 group-hover:text-orange-500 transition-colors">
                 {stats.matches}+
               </div>
               <div className="text-sm md:text-base text-white/70 font-semibold tracking-wider uppercase">Pertandingan</div>
             </div>
-            <div className="text-center group hover:scale-105 transition-transform">
+            <div className="text-center group hover:scale-105 transition-transform will-change-transform">
               <div className="text-5xl md:text-7xl font-black text-orange-600 mb-3 group-hover:text-orange-500 transition-colors">
                 {stats.teams}+
               </div>
               <div className="text-sm md:text-base text-white/70 font-semibold tracking-wider uppercase">Tim</div>
             </div>
-            <div className="text-center group hover:scale-105 transition-transform">
+            <div className="text-center group hover:scale-105 transition-transform will-change-transform">
               <div className="text-5xl md:text-7xl font-black text-orange-600 mb-3 group-hover:text-orange-500 transition-colors">
                 {stats.prize}Jt+
               </div>
               <div className="text-sm md:text-base text-white/70 font-semibold tracking-wider uppercase">Total Hadiah</div>
             </div>
-            <div className="text-center group hover:scale-105 transition-transform">
+            <div className="text-center group hover:scale-105 transition-transform will-change-transform">
               <div className="text-5xl md:text-7xl font-black text-orange-600 mb-3 group-hover:text-orange-500 transition-colors">
                 {stats.spectators}+
               </div>
@@ -299,25 +313,28 @@ export default function BayanOpen() {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
             {legends.map((legend, index) => (
-              <div key={index} className="bg-white/5 backdrop-blur-md rounded-3xl overflow-hidden border border-white/10 hover:border-orange-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl">
-                <div className="aspect-[4/5] relative overflow-hidden bg-gradient-to-br from-blue-800 to-blue-900">
-                  <img 
+              <div key={index} className="bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 hover:border-orange-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl will-change-transform">
+                <div className="aspect-[3/4] relative overflow-hidden bg-gradient-to-br from-blue-800 to-blue-900">
+                  <Image 
                     src={legend.image}
                     alt={legend.name}
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 40vw"
+                    className="object-cover"
+                    loading="lazy"
+                    quality={85}
                   />
-                  
                 </div>
-                <div className="p-8">
-                  <h3 className="text-3xl font-black text-white mb-2">{legend.name}</h3>
-                  <p className="text-orange-500 font-bold text-lg mb-6">{legend.title}</p>
-                  <div className="space-y-3">
+                <div className="p-6">
+                  <h3 className="text-2xl font-black text-white mb-1">{legend.name}</h3>
+                  <p className="text-orange-500 font-bold text-base mb-4">{legend.title}</p>
+                  <div className="space-y-2">
                     {legend.achievements.map((achievement, i) => (
-                      <div key={i} className="flex items-start gap-3 text-white/80">
-                        <Trophy className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
-                        <span className="font-semibold">{achievement}</span>
+                      <div key={i} className="flex items-start gap-2 text-white/80">
+                        <Trophy className="w-4 h-4 text-orange-500 flex-shrink-0 mt-0.5" />
+                        <span className="font-medium text-sm">{achievement}</span>
                       </div>
                     ))}
                   </div>
@@ -346,7 +363,7 @@ export default function BayanOpen() {
 
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {categories.map((category, index) => (
-              <div key={index} className="bg-gradient-to-br from-blue-50 to-orange-50 p-8 rounded-2xl border-2 border-blue-100 hover:border-orange-500 transition-all duration-300 hover:scale-105 hover:shadow-xl">
+              <div key={index} className="bg-gradient-to-br from-blue-50 to-orange-50 p-8 rounded-2xl border-2 border-blue-100 hover:border-orange-500 transition-all duration-300 hover:scale-105 hover:shadow-xl will-change-transform">
                 <h3 className="text-2xl font-black text-blue-900 mb-2 uppercase">{category.title}</h3>
                 {category.subtitle && (
                   <p className="text-orange-600 font-bold text-lg mb-4">{category.subtitle}</p>
@@ -370,7 +387,7 @@ export default function BayanOpen() {
             </h3>
             <div className="grid md:grid-cols-2 gap-8">
               {venues.map((venue, index) => (
-                <div key={index} className="bg-gradient-to-br from-blue-900 to-blue-950 p-8 rounded-2xl text-white hover:scale-105 transition-all duration-300 hover:shadow-2xl">
+                <div key={index} className="bg-gradient-to-br from-blue-900 to-blue-950 p-8 rounded-2xl text-white hover:scale-105 transition-all duration-300 hover:shadow-2xl will-change-transform">
                   <MapPin className="w-12 h-12 text-orange-500 mb-4" />
                   <h4 className="text-2xl font-black mb-3">{venue.name}</h4>
                   <p className="text-white/80 mb-6 font-semibold">{venue.description}</p>
@@ -394,7 +411,7 @@ export default function BayanOpen() {
             </h3>
             <div className="grid md:grid-cols-3 gap-6">
               {prizes.map((prize, index) => (
-                <div key={index} className={`bg-gradient-to-br ${prize.color} p-8 rounded-2xl text-white text-center transform hover:scale-105 transition-all duration-300 hover:shadow-2xl`}>
+                <div key={index} className={`bg-gradient-to-br ${prize.color} p-8 rounded-2xl text-white text-center transform hover:scale-105 transition-all duration-300 hover:shadow-2xl will-change-transform`}>
                   <Trophy className="w-16 h-16 mx-auto mb-4" />
                   <h4 className="text-2xl font-black mb-3">{prize.place}</h4>
                   <p className="font-semibold text-lg">{prize.prize}</p>
@@ -409,16 +426,16 @@ export default function BayanOpen() {
       <VideoSection />
 
       {/* Timeline Section */}
-      <section id="timeline" className="relative min-h-screen px-6 md:px-10 py-20 bg-gradient-to-br from-yellow-400 to-yellow-600">
+      <section id="timeline" className="relative min-h-screen px-6 md:px-10 py-20 bg-gradient-to-br from-yellow-500 to-amber-600">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 text-center text-white">
-            TIMELINE <span className="text-blue-900">EVENT</span>
+            TIMELINE <span className="text-white">EVENT</span>
           </h2>
-          <p className="text-center text-white/90 mb-16 text-lg font-semibold">Jadwal lengkap Bayan Open 2025</p>
+          <p className="text-center text-white/90 mb-16 text-lg uppercase font-bold">Jadwal lengkap Bayan Open 2025</p>
 
           <div className="space-y-8">
             {timeline.map((item, index) => (
-              <div key={index} className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105">
+              <div key={index} className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105 will-change-transform">
                 <div className="flex flex-col md:flex-row md:items-center gap-4">
                   <div className="bg-blue-900 text-white px-6 py-3 rounded-full font-black text-lg inline-block self-start">
                     {item.date}
@@ -435,7 +452,7 @@ export default function BayanOpen() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative min-h-[60vh] px-6 md:px-10 py-20  flex items-center justify-center">
+      <section className="relative min-h-[60vh] px-6 md:px-10 py-20 flex items-center justify-center opacity-95 bg-black/50">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white mb-6">
             SIAP MENJADI<br />
@@ -460,10 +477,13 @@ export default function BayanOpen() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div className="md:col-span-1">
-              <img
+              <Image
                 src="https://res.cloudinary.com/djs5pi7ev/image/upload/w_300,q_auto,f_auto/v1767765525/Bayan_The_Next_Level_e77j8d.png"
                 alt="BAYAN SC"
-                className="h-16 md:h-20 object-contain mb-4"
+                width={300}
+                height={80}
+                className="h-16 md:h-20 w-auto object-contain mb-4"
+                loading="lazy"
               />
               <p className="text-white/60 text-sm leading-relaxed">
                 Menghadirkan event yang dikelola Bayan Group sejak 2022.
