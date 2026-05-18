@@ -51,7 +51,7 @@ const routes = [
     startTime: "06.20 WITA",
     cutOffTime: "50 Menit",
     description: "Dirancang untuk peserta usia 6–12 tahun, rute ini aman, menyenangkan, dan penuh semangat. Cocok untuk memperkenalkan dunia lari sejak dini, dengan suasana yang ramah, mendukung, dan pemandangan menarik sepanjang jalur lomba.",
-    gradient: "from-purple-400 to-pink-600"
+    gradient: "from-yellow-500 to-amber-600"
   }
 ];
 

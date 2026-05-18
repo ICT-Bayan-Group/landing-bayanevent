@@ -63,7 +63,7 @@ export default function Footer() {
         </div>
         
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row font-semibold justify-between items-center gap-4 text-sm text-white/60">
-          <div>© 2025 PT BAYAN RESOURCES TBK. All rights reserved.</div>
+          <div>© 2026 PT BAYAN RESOURCES TBK. All rights reserved.</div>
         </div>
       </div>
     </footer>
